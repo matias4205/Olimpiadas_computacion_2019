@@ -1,0 +1,25 @@
+{
+  "name": "olimpiadas_computacion_2019",
+  "version": "1.0.0",
+  "description": "Proyecto de prueba para olimpiadas de computacion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matias4205/Olimpiadas_computacion_2019.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "matias4205",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matias4205/Olimpiadas_computacion_2019/issues"
+  },
+  "homepage": "https://github.com/matias4205/Olimpiadas_computacion_2019#readme",
+  "dependencies": {
+    "create-react-app": "^3.1.1"
+  }
+}
