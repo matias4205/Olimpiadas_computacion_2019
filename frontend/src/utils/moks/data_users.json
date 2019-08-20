@@ -1,0 +1,30 @@
+[
+    {
+        "id": "A54ISK811",
+        "firstName": "Matias",
+        "lastName": "Perez",
+        "role": "Operator",
+        "image": "../assets/images/profile.jpg"
+    },
+    {
+        "id": "A54ISK811",
+        "firstName": "Ricardo",
+        "lastName": "Montaner",
+        "role": "Operator",
+        "image": "../assets/images/profile.jpg"
+    },
+    {
+        "id": "A54ISK811",
+        "firstName": "Juan",
+        "lastName": "Dominguez",
+        "role": "Administrator",
+        "image": "../assets/images/profile.jpg"
+    },
+    {
+        "id": "A54ISK811",
+        "firstName": "Carlos",
+        "lastName": "Gutierrez",
+        "role": "Operator",
+        "image": "../assets/images/profile.jpg"
+    }
+]

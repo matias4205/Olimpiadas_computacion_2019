@@ -1,0 +1,22 @@
+[
+    {
+        "date": "12/05/2019",
+        "time": "20:00",
+        "state": "active",
+        "data": {
+            "water": 20,
+            "light": 12,
+            "temperature": 18
+        }
+    },
+    {
+        "date": "12/05/2019",
+        "time": "21:00",
+        "state": "inactive",
+        "data": {   
+            "water": 17,
+            "light": 15,
+            "temperature": 20
+        }
+    }
+]
