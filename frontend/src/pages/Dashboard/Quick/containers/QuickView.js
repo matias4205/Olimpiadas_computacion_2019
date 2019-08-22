@@ -80,9 +80,8 @@ function Dashboard(){
         responsive: true,
     };
 
-
     return (
-        <div className="content-wrapper">
+        <React.Fragment>
             <ContentHeader title="Dashboard" subtitle="Quick view" />
             <section className="content">
                 <div className="row">
@@ -128,7 +127,7 @@ function Dashboard(){
                     </div>
                 </div>
             </section>
-        </div>
+        </React.Fragment>
     );
 }
 

@@ -1,11 +1,13 @@
 import React from 'react';
 
 import QuickView from '../pages/Dashboard/Quick/containers/QuickView';
-// import Profile from '../pages/Profile/containers/Profile'
+import Profile from '../pages/Profile/containers/Profile'
 
 const Content = () => {
     return (
-        <QuickView />
+        <div className="content-wrapper">
+            <Profile />
+        </div>
     );
 };
 
