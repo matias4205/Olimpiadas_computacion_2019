@@ -13,9 +13,9 @@ const Header = () => {
                 </a>
                 <div className="navbar-custom-menu">
                     <ul className="nav navbar-nav">
-                        <li className="dropdown messages-menu">
+                        <li className="dropdown notifications-menu">
                             <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                                <i className="fa fa-envelope-o"></i>
+                                <i className="fa fa-bell"></i>
                                 <span className="label label-success">4</span>
                             </a>
                             <ul className="dropdown-menu">

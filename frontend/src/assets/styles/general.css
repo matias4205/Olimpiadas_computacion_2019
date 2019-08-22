@@ -5,3 +5,28 @@
 .logo{
     background-color: #172229 !important;
 }
+
+.info-hoverable{
+    position: absolute;
+    bottom: 23px;
+    right: 25px;
+}
+
+.info-hoverable::after{
+    padding: 8px;
+    min-width: 200px;
+    content: 'Este valor es un promedio de todos los sectores de la ultima medicion de el dato en cuestion';
+    display: none;
+    position: absolute;
+    background: hsla(0, 0%, 0%, .7);
+    border-radius: 2px 10px 10px 10px;
+    z-index: 1;
+    color: white;
+    font-family: 'Segoe UI';
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.info-hoverable:hover::after{
+    display: inline-block;
+}

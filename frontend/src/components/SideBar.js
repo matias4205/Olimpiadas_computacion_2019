@@ -1,21 +1,17 @@
 import React from 'react';
 
+import ProfileDataSmall from '../pages/Profile/components/ProfileData_Small';
+
+import profilePhoto from '../assets/images/profile.jpg';
+
 import profileData from '../utils/moks/data_profile.json';
-const profilePhoto = require('../assets/images/profile.jpg');
 
 const SideBar = () => {
     return (
         <aside className="main-sidebar">
             <section className="sidebar">
-                <div className="user-panel">
-                    <div className="pull-left image">
-                        <img src={ profilePhoto } className="img-circle" alt="User Image" />
-                    </div>
-                    <div className="pull-left info">
-                        <p>{`${profileData.firstName} ${profileData.lastName}`}</p>
-                        <a href="#"><i className="fa fa-circle text-success"></i> { profileData.role }</a>
-                    </div>
-                </div>
+                <ProfileDataSmall profilePhoto={profilePhoto} firstName={profileData.firstName} lastName={profileData.lastName} role={profileData.role} uid={profileData.uid} />
+
                 <ul className="sidebar-menu" data-widget="tree">
                     <li className="header">TOOLS</li>
                     <li className="treeview">
