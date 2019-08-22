@@ -13,10 +13,31 @@ const CompanyInfo = (props) => {
                 </div>
             </div>
             <div className="box-body">
-                <div className="row">
+                <div className="container row" style={{ width: '100%' }}>
                     <div className="col-md-12">
-                        <div className="form-group">
-                            <label className="control-label" htmlFor="companyName">Company Name</label>
+                        <div className="form-group row">
+                            <h4 className="col-form-label col-sm-2" htmlFor="companyName"><strong>Company Name: </strong></h4>
+                            <div className="col-sm-10">
+                                <h4 id="companyName">{props.companyName}</h4>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <h4 className="col-form-label col-sm-2" htmlFor="companyName"><strong>Comercial Denomination: </strong></h4>
+                            <div className="col-sm-10">
+                                <h4 id="companyName">{props.comercialDenomination}</h4>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <h4 className="col-form-label col-sm-2" htmlFor="companyName"><strong>Address: </strong></h4>
+                            <div className="col-sm-10">
+                                <h4 id="companyName">{props.address}</h4>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <h4 className="col-form-label col-sm-2" htmlFor="companyName"><strong>Fiscal Code: </strong></h4>
+                            <div className="col-sm-10">
+                                <h4 id="companyName">{props.fiscalCode}</h4>
+                            </div>
                         </div>
                     </div>
                 </div>

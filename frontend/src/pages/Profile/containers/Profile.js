@@ -4,8 +4,9 @@ import ProfileDataBig from '../components/ProfileData_Big';
 import ContentHeader from '../../../components/ContentHeader';
 import CompanyInfo from '../components/CompanyInfo';
 
-import profilePhoto from '../../../assets/images/profile.jpg';
+import './styles/Profile.css'
 
+import profilePhoto from '../../../assets/images/profile.jpg';
 import profileData from '../../../utils/moks/data_profile.json';
 
 class Profile extends Component {
