@@ -13,7 +13,7 @@ class Profile extends Component {
     render() {
         return (
             <React.Fragment>
-                <ContentHeader title="Profile" />
+                <ContentHeader title="Profile" subtitle="Profile data" />
                 <section className="content">
                     <div className="container-fluid">
                         <ProfileDataBig profilePhoto={profilePhoto} firstName={profileData.firstName} lastName={profileData.lastName} role={profileData.role} uid={profileData.uid} />

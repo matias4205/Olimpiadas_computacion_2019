@@ -1,5 +1,7 @@
 import React from 'react';
 
+import NotificationItem from './NotificationItem';
+
 const Header = () => {
     return (
         <header className="main-header">
@@ -22,18 +24,8 @@ const Header = () => {
                                 <li className="header">You have 4 messages</li>
                                 <li>
                                     <ul className="menu">
-                                        <li>
-                                            <a href="#">
-                                                <div className="pull-left">
-                                                    <img src="img/user2-160x160.jpg" className="img-circle" alt="User Image" />
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i className="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
+                                        <NotificationItem icon="fa-warning" color="yellow" message="Sector A5 is running out of water" />
+                                        <NotificationItem icon="fa-warning" color="red" message="Sector A5 is out of water!" />
                                     </ul>
                                 </li>
                             </ul>
