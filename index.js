@@ -19,6 +19,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
 });
 
-const server = app.listen(srvConfig.PORT, () => {
+const server = app.listen(srvConfig.port, () => {
   console.log('Server has been initialized on http://localhost:' + server.address().port);
 });
