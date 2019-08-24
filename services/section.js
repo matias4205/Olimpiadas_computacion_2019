@@ -2,7 +2,7 @@ const MongoLib = require('../lib/mongo');
 
 class SectionService{    
     constructor(){
-        this.collection = 'section';
+        this.collection = 'sections';
         this.mongodb = new MongoLib();
     }
 }

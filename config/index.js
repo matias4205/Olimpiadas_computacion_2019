@@ -13,7 +13,12 @@ const dbConfig = {
     dbName: process.env.DB_NAME,
 }
 
+const adminConfig = {
+    authJwtSecret: "ED489618C994149ADD8186F61B7BC9DBA54230B6012A29F20C69212757A52C00"
+}
+
 module.exports = {
     srvConfig,
-    dbConfig
+    dbConfig,
+    adminConfig
 }
