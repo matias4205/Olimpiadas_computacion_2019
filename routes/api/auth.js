@@ -6,9 +6,14 @@ const jwt = require('jsonwebtoken');
 const { adminConfig } = require('../../config');
 const { registerUserSchema } = require('../../utils/schemas/auth');
 const validation = require('../../utils/middlewares/validationHandler');
+const UserService = require('../../services/user');
+
+//Services
+const userService = new UserService()
 
 //Basic strategy
 require('../../utils/strategies/jwt');
+require('../../utils/strategies/basic');
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('basic', (err, user) => {
@@ -31,7 +36,19 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.post('/register', passport.authenticate('jwt', { session: false }), validation(registerUserSchema), (req, res, next) => {
+router.post('/register', passport.authenticate('jwt', { session: false }), validation(registerUserSchema), async (req, res, next) => {
+    const { body: user } = req;
+
+    try{
+        const createdUser = await userService.createUser({ user });
+        
+        res.status(201).json({
+            data: createdUser,
+            message: 'User created succesfuly'
+        })
+    } catch(err){
+        next(err);
+    }
 
 });
 
