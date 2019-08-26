@@ -6,30 +6,28 @@ class SectionService{
         this.mongodb = new MongoLib();
     }
 
-    async getUser({ sectionId }){
+    async getSection({ sectionId }){
         const section = await this.mongodb.get(this.collection, sectionId);
         return section || {};
     }
     
-    /* 
-    async getUsers({ productorId }){
+    async getSections({ productorId }){
         const query = { productorId };
-        const users =  await this.mongodb.getAll(this.collection, query);
-        return users || [];
+        const sections =  await this.mongodb.getAll(this.collection, query);
+        return sections || [];
     }
-    */
 
-    async createUser({ section }){
+    async createSection({ section }){
         const createdSectionId = await this.mongodb.create(this.collection, section);
         return createdSectionId;
     }
 
-    async updateUser({ sectionId, section }){
+    async updateSection({ sectionId, section }){
         const updatedSection = await this.mongodb.update(this.collection, sectionId, section);
         return updatedSection;
     }
 
-    async deleteUser({ sectionId }){
+    async deleteSection({ sectionId }){
         const deletedSection = await this.mongodb.delete(this.collection, sectionId);
         return deletedSection;
     }
