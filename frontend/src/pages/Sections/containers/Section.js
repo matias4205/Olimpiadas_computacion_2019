@@ -28,26 +28,6 @@ class Section extends Component {
                         {
                             id: 4,
                             description: 'test'
-                        },
-                        {
-                            id: 5,
-                            description: 'test'
-                        },
-                        {
-                            id: 6,
-                            description: 'test'
-                        },
-                        {
-                            id: 7,
-                            description: 'test'
-                        },
-                        {
-                            id: 8,
-                            description: 'test'
-                        },
-                        {
-                            id: 9,
-                            description: 'test'
                         }
                     ]
                 },
@@ -134,6 +114,90 @@ class Section extends Component {
                             description: 'test'
                         }
                     ]
+                },
+                {
+                    id: 'F',
+                    units: [
+                        {
+                            id: 1,
+                            description: 'test'
+                        },
+                        {
+                            id: 2,
+                            description: 'test'
+                        },
+                        {
+                            id: 3,
+                            description: 'test'
+                        },
+                        {
+                            id: 4,
+                            description: 'test'
+                        }
+                    ]
+                },
+                {
+                    id: 'G',
+                    units: [
+                        {
+                            id: 1,
+                            description: 'test'
+                        },
+                        {
+                            id: 2,
+                            description: 'test'
+                        },
+                        {
+                            id: 3,
+                            description: 'test'
+                        },
+                        {
+                            id: 4,
+                            description: 'test'
+                        }
+                    ]
+                },
+                {
+                    id: 'H',
+                    units: [
+                        {
+                            id: 1,
+                            description: 'test'
+                        },
+                        {
+                            id: 2,
+                            description: 'test'
+                        },
+                        {
+                            id: 3,
+                            description: 'test'
+                        },
+                        {
+                            id: 4,
+                            description: 'test'
+                        }
+                    ]
+                },
+                {
+                    id: 'I',
+                    units: [
+                        {
+                            id: 1,
+                            description: 'test'
+                        },
+                        {
+                            id: 2,
+                            description: 'test'
+                        },
+                        {
+                            id: 3,
+                            description: 'test'
+                        },
+                        {
+                            id: 4,
+                            description: 'test'
+                        }
+                    ]
                 }
             ]
         }
@@ -154,20 +218,14 @@ class Section extends Component {
     render() {
         return (
             <React.Fragment>
-                <ContentHeader title="Section" subtitle="Management" />
+                <ContentHeader title="Sections Management" subtitle="Manage sections and units" />
                 <section className="content">
-                    <div className="row">
-                        <ul>
-                            {this.state.data.map(index => {
-                                return (
-                                    <li id={index.id}>
-                                        <div className="col-md-3">
-                                            <SectionLayout stateId={index.id} units={index.units} />
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                    <div className="masonry">
+                        {this.state.data.map(index => {
+                            return (
+                                <SectionLayout stateId={index.id} units={index.units} />
+                            );
+                        })}
                     </div>
                 </section>
             </React.Fragment>

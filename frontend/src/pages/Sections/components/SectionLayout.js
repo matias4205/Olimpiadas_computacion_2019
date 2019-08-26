@@ -5,24 +5,24 @@ import '../components/section_styles.css';
 const Section = (props) => {
     return (
         <React.Fragment>
-            <div className="box">
-                <h1 className="box-header with-border no-margin">{props.stateId}</h1>
+            <div className="box item">
+                <h1 className="box-header no-margin">{props.stateId}</h1>
                 <div className="box-body">
                     <table className="table">
                         <tbody>
                             <tr>
                                 <th>Unit</th>
                                 <th>Description</th>
-                                <th></th>
+                                <th className="text-center">Actions</th>
                             </tr>
-                            {props.units.map(index => {
+                            {props.units.map(item => {
                                 return (
                                     <tr>
-                                        <td className="id">{index.id}</td>
-                                        <td>{index.description}</td>
-                                        <td className="actions">
-                                            <button>DELETE</button>
-                                            <button>EDIT</button>
+                                        <td className="id">{item.id}</td>
+                                        <td>{item.description}</td>
+                                        <td className="actions text-center">
+                                            <button className="action-button delete"><i className="ion ion-trash-b"/></button>
+                                            <button className="action-button edit"><i className="ion ion-android-create"/></button>                                            
                                         </td>
                                     </tr>
                                 );
