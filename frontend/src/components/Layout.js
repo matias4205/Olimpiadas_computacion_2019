@@ -1,14 +1,19 @@
 import React from 'react';
+
 import SideBar from '../components/SideBar'
 import Header from '../components/Header';
 
 const Layout = (props) => {
     return (
-        <div className="content-wrapper">
+        <React.Fragment>
             <Header />
             <SideBar />
-            {props.children}
-        </div>
+            <div className="content-wrapper">
+                <div className="content row">
+                    {props.children}
+                </div>
+            </div>
+        </React.Fragment>
     );
 };
 

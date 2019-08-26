@@ -1,0 +1,12 @@
+.id {
+  width: 30px;
+}
+
+.actions {
+  width: 140px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 !important;
+}

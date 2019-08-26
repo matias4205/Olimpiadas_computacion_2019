@@ -9,7 +9,7 @@ import {
 import Layout from "./components/Layout";
 import Profile from './pages/Profile/containers/Profile';
 import QuickView from './pages/Dashboard/Quick/containers/QuickView'
-import Management from './pages/Management/containers/Management';
+import Section from './pages/Sections/containers/Section';
 
 import './assets/styles/general.css';
 
@@ -19,7 +19,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/" render={() => (<Redirect to='/dashboard/quick'/>)}/>
-          <Route exact path="/sections" component={Management}/>
+          <Route exact path="/sections" component={Section}/>
           <Route exact path="/profile/:userId" component={Profile} />
           <Route exact path="/dashboard/quick" component={QuickView} />
           <Route>404 Not Found</Route>
