@@ -1,20 +1,20 @@
 const MongoLib = require('../lib/mongo');
 
-class UserService{    
+class UserService{
     constructor(){
         this.collection = 'users';
         this.mongodb = new MongoLib();
     }
 
-    async getUsers(){
-        const query = {  };
-        const users =  await this.mongodb.getAll(this.collection, query);
-        return users || [];
-    }
-    
     async getUser({ userId }){
         const user = await this.mongodb.get(this.collection, userId);
         return user || {};
+    }
+    
+    async getUsers({ productorId }){
+        const query = { productorId };
+        const users =  await this.mongodb.getAll(this.collection, query);
+        return users || [];
     }
     
     async createUser({ user }){

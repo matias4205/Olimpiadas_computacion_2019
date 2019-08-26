@@ -4,15 +4,8 @@ const boom = require('boom');
 const jwt = require('jsonwebtoken');
 
 const { adminConfig } = require('../../config');
-const { registerUserSchema } = require('../../utils/schemas/auth');
-const validation = require('../../utils/middlewares/validationHandler');
-const UserService = require('../../services/user');
-
-//Services
-const userService = new UserService()
 
 //Basic strategy
-require('../../utils/strategies/jwt');
 require('../../utils/strategies/basic');
 
 router.post('/login', (req, res, next) => {
@@ -34,22 +27,6 @@ router.post('/login', (req, res, next) => {
             return res.status(200).json({ access_token: token });
         });
     })(req, res, next);
-});
-
-router.post('/register', passport.authenticate('jwt', { session: false }), validation(registerUserSchema), async (req, res, next) => {
-    const { body: user } = req;
-
-    try{
-        const createdUser = await userService.createUser({ user });
-        
-        res.status(201).json({
-            data: createdUser,
-            message: 'User created succesfuly'
-        })
-    } catch(err){
-        next(err);
-    }
-
 });
 
 module.exports = router;
