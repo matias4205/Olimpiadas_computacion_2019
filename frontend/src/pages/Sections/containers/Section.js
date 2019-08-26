@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import SectionLayout from '../components/SectionLayout';
+import ContentHeader from '../../../components/ContentHeader';
 
 import '../components/section_styles.css';
 
@@ -34,6 +35,18 @@ class Section extends Component {
                         },
                         {
                             id: 6,
+                            description: 'test'
+                        },
+                        {
+                            id: 7,
+                            description: 'test'
+                        },
+                        {
+                            id: 8,
+                            description: 'test'
+                        },
+                        {
+                            id: 9,
                             description: 'test'
                         }
                     ]
@@ -100,6 +113,27 @@ class Section extends Component {
                             description: 'test'
                         }
                     ]
+                },
+                {
+                    id: 'E',
+                    units: [
+                        {
+                            id: 1,
+                            description: 'test'
+                        },
+                        {
+                            id: 2,
+                            description: 'test'
+                        },
+                        {
+                            id: 3,
+                            description: 'test'
+                        },
+                        {
+                            id: 4,
+                            description: 'test'
+                        }
+                    ]
                 }
             ]
         }
@@ -119,17 +153,24 @@ class Section extends Component {
 
     render() {
         return (
-            <div>
-                <ul>
-                    {this.state.data.map(index => {
-                        return (
-                            <li id={index.id}>
-                                <SectionLayout stateId={index.id} units={index.units} />
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
+            <React.Fragment>
+                <ContentHeader title="Section" subtitle="Management" />
+                <section className="content">
+                    <div className="row">
+                        <ul>
+                            {this.state.data.map(index => {
+                                return (
+                                    <li id={index.id}>
+                                        <div className="col-md-3">
+                                            <SectionLayout stateId={index.id} units={index.units} />
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                </section>
+            </React.Fragment>
         );
     }
 }

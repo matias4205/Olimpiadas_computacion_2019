@@ -9,9 +9,7 @@ const Layout = (props) => {
             <Header />
             <SideBar />
             <div className="content-wrapper">
-                <div className="content row">
-                    {props.children}
-                </div>
+                {props.children}
             </div>
         </React.Fragment>
     );

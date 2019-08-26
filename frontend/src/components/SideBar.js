@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import ProfileDataSmall from '../pages/Profile/components/ProfileData_Small';
 
@@ -25,27 +26,21 @@ const SideBar = () => {
                             </span> */}
                         </a>
                         <ul className="treeview-menu">
-                            <li><a href="/dashboard/quick"><i className="fa fa-rocket"></i>Quick view</a></li>
-                            <li><a href="/dashboard/history"><i className="fa fa-history"></i>Historical</a></li>
+                            <li><Link to="/dashboard/quick"><i className="fa fa-rocket"></i>Quick view</Link></li>
+                            <li><Link to="/dashboard/history"><i className="fa fa-history"></i>Historical</Link></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/tasks">
+                        <Link to="/tasks">
                             <i className="fa fa-tasks"></i>
                             <span>Tasks</span>
-                            {/* <span className="pull-right">
-                                <i className="fa fa-circle text-info" />
-                            </span> */}
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/users">
+                        <Link to="/users">
                             <i className="fa fa-user"></i>
                             <span>Manage Users</span>
-                            {/* <span className="pull-right">
-                                <i className="fa fa-circle text-info" />
-                            </span> */}
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </section>
