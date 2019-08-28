@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import SectionLayout from '../components/SectionLayout';
 import ContentHeader from '../../../components/ContentHeader';
+import Modal from '../../../components/Modal';
 
 import '../components/section_styles.css';
 
@@ -226,6 +227,7 @@ class Section extends Component {
                                 <SectionLayout stateId={index.id} units={index.units} />
                             );
                         })}
+                        <Modal isOpen={true}>Es</Modal>
                     </div>
                 </section>
             </React.Fragment>
