@@ -18,3 +18,5 @@ const scopeValidationHandler = (requiredScopes) => {
         }
     };
 }
+
+module.exports = scopeValidationHandler;

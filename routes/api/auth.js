@@ -8,6 +8,7 @@ const { createUserSchema } = require('../../utils/schemas/user');
 const validationHandler = require('../../utils/middlewares/validationHandler');
 const UserService = require('../../services/user');
 const userService = new UserService();
+
 //Basic strategy
 require('../../utils/strategies/basic');
 

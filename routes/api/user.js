@@ -3,7 +3,7 @@ const passport = require('passport');
 
 const { createUserSchema, updateUserSchema } = require('../../utils/schemas/user');
 const { mongoIdSchema } = require('../../utils/schemas/general');
-const validation = require('../../utils/middlewares/validationHandler');
+const validationHandler = require('../../utils/middlewares/validationHandler');
 const UserService = require('../../services/user');
 
 //Services
@@ -27,7 +27,7 @@ router.get('/:userId', async (req, res, next) => {
     }
 });
 
-router.post('/', passport.authenticate('jwt', { session: false }), validation(createUserSchema), async (req, res, next) => {
+router.post('/', passport.authenticate('jwt', { session: false }), validationHandler(createUserSchema), async (req, res, next) => {
     const { body: user } = req;
 
     try{
@@ -43,7 +43,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), validation(cr
 
 });
 
-router.put('/:userId', passport.authenticate('jwt', { session: false }), validation({ userId: mongoIdSchema }, 'params'), validation(updateUserSchema), async (req, res, next) => {
+router.put('/:userId', passport.authenticate('jwt', { session: false }), validationHandler({ userId: mongoIdSchema }, 'params'), validationHandler(updateUserSchema), async (req, res, next) => {
     const { userId } = req.params;
     const { body: user } = req;
 
@@ -60,7 +60,7 @@ router.put('/:userId', passport.authenticate('jwt', { session: false }), validat
 
 });
 
-router.delete('/:userId', passport.authenticate('jwt', { session: false }), validation({ userId: mongoIdSchema }, 'params'), async (req, res, next) => {
+router.delete('/:userId', passport.authenticate('jwt', { session: false }), validationHandler({ userId: mongoIdSchema }, 'params'), async (req, res, next) => {
     const { userId } = req.params;
 
     try{

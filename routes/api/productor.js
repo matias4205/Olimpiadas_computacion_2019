@@ -3,8 +3,8 @@ const passport = require('passport');
 
 const validation = require('../../utils/middlewares/validationHandler');
 const { createProductorSchema } = require('../../utils/schemas/productor');
-const { createSectionSchema } = require('../../utils/schemas/section')
-const { mongoIdSchema } = require('../../utils/schemas/general')
+const { createSectionSchema } = require('../../utils/schemas/section');
+const { mongoIdSchema } = require('../../utils/schemas/general');
 const UserService = require('../../services/user');
 const ProdutorService = require('../../services/productor');
 const SectionService = require('../../services/section');
@@ -64,7 +64,6 @@ router.get('/:productorId/users', validation({ productorId: mongoIdSchema}, 'par
         next(err);
     }
 });
-
 
 // SECTIONS
 router.get('/:productorId/sections', validation({ productorId: mongoIdSchema }, 'params'), async (req, res, next) => {
