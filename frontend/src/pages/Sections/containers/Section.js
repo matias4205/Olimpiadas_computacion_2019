@@ -10,6 +10,8 @@ class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            deleteModalIsOpened: false,
+            editModalIsOpened: false,
             data: [
                 {
                     id: 'A',
@@ -216,6 +218,30 @@ class Section extends Component {
         // }
     }
 
+    toggleEditModal = e => {
+        if(this.state.editModalIsOpened){
+            this.setState({
+                editModalIsOpened: false
+            })
+        } else {
+            this.setState({
+                editModalIsOpened: true
+            })
+        }
+    }
+
+    toggleDeleteModal = e => {
+        if(this.state.deleteModalIsOpened){
+            this.setState({
+                deleteModalIsOpened: false
+            })
+        } else {
+            this.setState({
+                deleteModalIsOpened: true
+            })
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -224,10 +250,19 @@ class Section extends Component {
                     <div className="masonry">
                         {this.state.data.map(index => {
                             return (
-                                <SectionLayout stateId={index.id} units={index.units} />
+                                <SectionLayout stateId={index.id} units={index.units} openEditModal={this.toggleEditModal} openDeleteModal={this.toggleDeleteModal}/>
                             );
                         })}
-                        <Modal isOpen={true}>Es</Modal>
+                        <Modal
+                            isOpen={this.state.editModalIsOpened}
+                            onClose={this.toggleEditModal}
+                            title={"Edit unit description"}
+                        />
+                        <Modal
+                            isOpen={this.state.deleteModalIsOpened}
+                            onClose={this.toggleDeleteModal}
+                            title={"Do you really want to delete this unit?"}
+                        />
                     </div>
                 </section>
             </React.Fragment>

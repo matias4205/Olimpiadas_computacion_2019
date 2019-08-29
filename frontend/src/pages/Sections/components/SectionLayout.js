@@ -21,8 +21,8 @@ const Section = (props) => {
                                         <td className="id">{item.id}</td>
                                         <td>{item.description}</td>
                                         <td className="actions text-center">
-                                            <button className="action-button delete"><i className="ion ion-trash-b"/></button>
-                                            <button className="action-button edit"><i className="ion ion-android-create"/></button>                                            
+                                            <button onClick={props.openEditModal} className="action-button delete"><i className="ion ion-trash-b"/></button>
+                                            <button onClick={props.openDeleteModal} className="action-button edit"><i className="ion ion-android-create"/></button>                                            
                                         </td>
                                     </tr>
                                 );

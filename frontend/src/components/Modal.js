@@ -7,9 +7,22 @@ const Modal = (props) => {
     }
 
     return ReactDOM.createPortal(
-        <div className="modal">
-            <div className="modal-content">
-                {props.children}
+        <div className="modal fade in" style={{"display": "block"}}>
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <button className="close" onClick={props.onClose}>
+                            <span area-hidden="true">x</span>    
+                        </button>
+                        <h3 className="modal-title">{props.title}</h3>
+                    </div>
+                    <div className="modal-body">
+                        {props.children}
+                    </div>
+                    <div className="modal-footer">
+
+                    </div>
+                </div>
             </div>
         </div>,
         document.getElementById('delete_modal')
