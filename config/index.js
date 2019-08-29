@@ -5,6 +5,28 @@ const srvConfig = {
     port: process.env.PORT
 }
 
+const userConfig = {
+    administratorUserDefaultScopes: [
+        'read:sections',
+        'update:sections',
+        'create:sections',
+        'delete:sections',
+        'read:data',
+        'delete:data',
+        'read:users',
+        'update:users',
+        'create:users',
+        'delete:users'
+    ],
+    operatorUserDefaultScopes: [
+        'read:sections',
+        'update:sections',
+        'create:sections',
+        'read:data',
+        'delete:data',
+    ]
+}
+
 const dbConfig = {
     dbUser: process.env.DB_USER,
     dbPassword: process.env.DB_PASSWORD,
@@ -14,11 +36,12 @@ const dbConfig = {
 }
 
 const adminConfig = {
-    authJwtSecret: "ED489618C994149ADD8186F61B7BC9DBA54230B6012A29F20C69212757A52C00"
+    authJwtSecret: process.env.AUTH_JWT_SECRET
 }
 
 module.exports = {
     srvConfig,
     dbConfig,
-    adminConfig
+    adminConfig,
+    userConfig
 }

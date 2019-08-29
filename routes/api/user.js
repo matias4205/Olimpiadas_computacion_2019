@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const { registerUserSchema, updateUserSchema } = require('../../utils/schemas/user');
+const { createUserSchema, updateUserSchema } = require('../../utils/schemas/user');
 const { mongoIdSchema } = require('../../utils/schemas/general');
 const validation = require('../../utils/middlewares/validationHandler');
-const securePassword = require('../../utils/sercurePassword');
 const UserService = require('../../services/user');
 
 //Services
@@ -28,9 +27,8 @@ router.get('/:userId', async (req, res, next) => {
     }
 });
 
-router.post('/', passport.authenticate('jwt', { session: false }), validation(registerUserSchema), async (req, res, next) => {
+router.post('/', passport.authenticate('jwt', { session: false }), validation(createUserSchema), async (req, res, next) => {
     const { body: user } = req;
-    user.password = await securePassword(user);
 
     try{
         const createdUserId = await userService.createUser({ user });
