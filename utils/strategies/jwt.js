@@ -1,8 +1,9 @@
 const passport = require('passport');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const boom = require('boom');
+
+const UserService = require('../../services/user')
 const { adminConfig } = require('../../config');
-const MongoLib = require('../../lib/mongo');
 
 passport.use(
     new Strategy({
@@ -11,10 +12,10 @@ passport.use(
     },
     
     async (tokenPayload, done) => {
-        const mongoDB = new MongoLib();
+        const userService = new UserService();
 
         try{
-            const [user] = await mongoDB.getAll('users', { email: tokenPayload.email });
+            const [user] = await userService.getUsers('users', { email: tokenPayload.email });
             
             if(!user){
                 return done(boom.unauthorized(), false);

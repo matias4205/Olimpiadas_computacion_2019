@@ -4,14 +4,18 @@ const passport = require('passport');
 const { createUserSchema, updateUserSchema } = require('../../utils/schemas/user');
 const { mongoIdSchema } = require('../../utils/schemas/general');
 const validationHandler = require('../../utils/middlewares/validationHandler');
+
 const UserService = require('../../services/user');
+const ActivityService = require('../../services/activity');
 
 //Services
 const userService = new UserService();
+const activityService = new ActivityService();
 
 //Stragegies
 require('../../utils/strategies/jwt');
 
+//To get user data
 router.get('/:userId', async (req, res, next) => {
     const { userId } = req.params;
 
@@ -27,6 +31,23 @@ router.get('/:userId', async (req, res, next) => {
     }
 });
 
+//To get user activity
+router.get('/:userId/activity', async (req, res, next) => {
+    const { userId } = req.params;
+
+    try {
+        const activity = await activityService.getActivityByUser({ userId });
+
+        res.status(200).json({
+            data: activity,
+            message: 'User activity retrived succesfuly'
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+//To create a new user
 router.post('/', passport.authenticate('jwt', { session: false }), validationHandler(createUserSchema), async (req, res, next) => {
     const { body: user } = req;
 
@@ -43,6 +64,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), validationHan
 
 });
 
+//To edit an existent user
 router.put('/:userId', passport.authenticate('jwt', { session: false }), validationHandler({ userId: mongoIdSchema }, 'params'), validationHandler(updateUserSchema), async (req, res, next) => {
     const { userId } = req.params;
     const { body: user } = req;
@@ -60,6 +82,7 @@ router.put('/:userId', passport.authenticate('jwt', { session: false }), validat
 
 });
 
+//To delete an existent user
 router.delete('/:userId', passport.authenticate('jwt', { session: false }), validationHandler({ userId: mongoIdSchema }, 'params'), async (req, res, next) => {
     const { userId } = req.params;
 
