@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const { createSectionSchema, updateSectionSchema } = require('../../utils/schemas/section');
+const { createSectionSchema, updateSectionSchema, createUnitSchema, updateUnitSchema } = require('../../utils/schemas/section');
 const { mongoIdSchema } = require('../../utils/schemas/general');
 const validationHandler = require('../../utils/middlewares/validationHandler');
 
@@ -26,7 +26,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), async (req, re
     } 
 });
 
-router.post('/', passport.authenticate('jwt', { session: false }), validationHandler({ productorId: mongoIdSchema }, 'params'), validationHandler(createSectionSchema), async (req, res, next) => {
+router.post('/', passport.authenticate('jwt', { session: false }), validationHandler(createSectionSchema), async (req, res, next) => {
     const { productorId } = req.user;
     const { body: section } = req;
 
@@ -36,6 +36,36 @@ router.post('/', passport.authenticate('jwt', { session: false }), validationHan
         res.status(200).json({
             data: createdSection,
             message: 'Section created succesfuly'
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.post('/unit', passport.authenticate('jwt', { session: false }), validationHandler(createUnitSchema), async (req, res, next) => {
+    const { sectionId, unit } = req.body;
+
+    try {
+        const updatedSectionId = await sectionService.createUnit({ sectionId, unit });
+        
+        res.status(200).json({
+            data: updatedSectionId,
+            message: 'Unit created succesfuly'
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.put('/unit', passport.authenticate('jwt', { session: false }), validationHandler(updateUnitSchema), async (req, res, next) => {
+    const { sectionId, unitId, unit } = req.body;
+
+    try {
+        const updatedSectionId = await sectionService.updateUnit({ sectionId, unitId, unit });
+        
+        res.status(200).json({
+            data: updatedSectionId,
+            message: 'Unit updated succesfuly'
         });
     } catch (err) {
         next(err);

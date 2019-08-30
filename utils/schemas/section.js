@@ -1,22 +1,33 @@
 const joi = require('joi');
+const { mongoIdSchema } = require('./general')
 
+const sectionIdSchema = joi.string().max(3).min(1);
 const descriptionSchema = joi.string().max(50).allow('').optional();
 
 const createSectionSchema = joi.object({
-    sectionName: joi.string().max(3).min(1).required(),
+    _id: sectionIdSchema.required(),
     description: descriptionSchema
 });
 
 const updateSectionSchema = joi.object({
-    sectionName: joi.string().max(3).min(1),
-    description: descriptionSchema,
-    units: joi.array().items(joi.object({
-        unitName: joi.string(),
-        description: descriptionSchema
-    }))
+    description: descriptionSchema
 });
 
+const createUnitSchema = joi.object({
+    sectionId: sectionIdSchema.required(),
+    unit: joi.object({ _id: joi.string().max(2).required(), description: descriptionSchema }).required()
+});
+
+const updateUnitSchema = joi.object({
+    sectionId: sectionIdSchema.required(),
+    unitId: joi.string().max(2).required(),
+    unit: joi.object({ description: descriptionSchema }).required()
+})
+
 module.exports = {
+    sectionIdSchema,
     createSectionSchema,
-    updateSectionSchema
+    updateSectionSchema,
+    createUnitSchema,
+    updateUnitSchema
 }
