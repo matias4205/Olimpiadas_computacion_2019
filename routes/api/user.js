@@ -16,6 +16,23 @@ const activityService = new ActivityService();
 require('../../utils/strategies/jwt');
 
 //To get user data
+
+//Get all users of a sertain productor
+router.get('/', passport.authenticate('jwt', { session: false }), validationHandler({ productorId: mongoIdSchema}, 'params'), async (req, res, next) => {
+    const { productorId } = req.user;
+
+    try {
+        const users = await userService.getUsersByProductor({ productorId });
+
+        res.status(200).json({
+            data: users,
+            message: 'Users retrived succesfuly'
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
 router.get('/:userId', async (req, res, next) => {
     const { userId } = req.params;
 
@@ -50,9 +67,10 @@ router.get('/:userId/activity', async (req, res, next) => {
 //To create a new user
 router.post('/', passport.authenticate('jwt', { session: false }), validationHandler(createUserSchema), async (req, res, next) => {
     const { body: user } = req;
+    const { productorId } = req.user;
 
     try{
-        const createdUserId = await userService.createUser({ user });
+        const createdUserId = await userService.createUser({ user: {...user, productorId} });
         
         res.status(201).json({
             data: createdUserId,
@@ -61,7 +79,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), validationHan
     } catch(err){
         next(err);
     }
-
 });
 
 //To edit an existent user
@@ -79,7 +96,6 @@ router.put('/:userId', passport.authenticate('jwt', { session: false }), validat
     } catch(err){
         next(err);
     }
-
 });
 
 //To delete an existent user
@@ -96,7 +112,6 @@ router.delete('/:userId', passport.authenticate('jwt', { session: false }), vali
     } catch(err){
         next(err);
     }
-
 });
 
 module.exports = router;

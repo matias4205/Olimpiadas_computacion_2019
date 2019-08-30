@@ -15,12 +15,14 @@ passport.use(
         const userService = new UserService();
 
         try{
-            const [user] = await userService.getUsers('users', { email: tokenPayload.email });
+            const [user] = await userService.getUsersByEmail({ email: tokenPayload.email });
             
             if(!user){
                 return done(boom.unauthorized(), false);
             }
 
+            delete user.password;
+            
             return done(false, user);
         }catch(err){
             return done(err);

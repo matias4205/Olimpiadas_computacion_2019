@@ -7,7 +7,6 @@ const userPasswordSchema = joi.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{
 const createUserSchema = joi.object({
     firstName: joi.string().max(15).min(2).required(),
     lastName: joi.string().max(15).min(2).required(),
-    productorId: mongoIdSchema.required(),
     role: joi.string().valid('administrator', 'operator').required(),
     scopes: joi.array().min(1).items(joi.string().regex(/^([a-z]+):([a-z]+)$/)),
     email: userEmailSchema.required(),
@@ -15,13 +14,11 @@ const createUserSchema = joi.object({
 });
 
 const updateUserSchema = joi.object({
-    firstName: joi.string().max(15).min(2).required(),
-    lastName: joi.string().max(15).min(2).required(),
-    productorId: mongoIdSchema.required(),
-    role: joi.string().valid('administrator', 'operator').required(),
+    firstName: joi.string().max(15).min(2),
+    lastName: joi.string().max(15).min(2),
+    role: joi.string().valid('administrator', 'operator'),
     scopes: joi.array().min(1).items(joi.string().regex(/^([a-z]+):([a-z]+)$/)),
-    email: userEmailSchema.required(),
-    password: userPasswordSchema
+    email: userEmailSchema
 });
 
 module.exports = {

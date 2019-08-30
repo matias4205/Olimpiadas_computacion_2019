@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.use('/api/auth', apiAuthRouter);
-app.use('/api/user', apiUserRouter);
+app.use('/api/users', apiUserRouter);
 app.use('/api/productor', apiProductorRouter);
 app.use('/api/sections', apiSectionsRouter);
 app.use('/api/readings', apiReadingsRouter);
