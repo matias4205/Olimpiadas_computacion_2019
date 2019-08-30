@@ -14,12 +14,17 @@ const updateSectionSchema = joi.object({
 
 const createUnitSchema = joi.object({
     sectionId: sectionIdSchema.required(),
-    unit: joi.object({ _id: joi.string().max(2).required(), description: descriptionSchema }).required()
+    unit: joi.object({ _id: joi.string().max(5).required(), description: descriptionSchema }).required()
 });
 
 const updateUnitSchema = joi.object({
     sectionId: sectionIdSchema.required(),
-    unit: joi.object({ _id: joi.string().max(2).required(), description: descriptionSchema }).required()
+    unit: joi.object({ _id: joi.string().max(5).required(), description: descriptionSchema }).required()
+})
+
+const deleteUnitSchema = joi.object({
+    sectionId: sectionIdSchema.required(),
+    unitId: joi.string().max(5).required()
 })
 
 module.exports = {
@@ -27,5 +32,6 @@ module.exports = {
     createSectionSchema,
     updateSectionSchema,
     createUnitSchema,
-    updateUnitSchema
+    updateUnitSchema,
+    deleteUnitSchema
 }

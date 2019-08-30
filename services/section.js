@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 const MongoLib = require('../lib/mongo');
 
 class SectionService{
@@ -6,11 +8,6 @@ class SectionService{
         this.mongodb = new MongoLib();
     }
 
-    async getSection({ sectionId }){
-        const section = await this.mongodb.get(this.collection, sectionId);
-        return section || {};
-    }
-    
     async getSections({ productorId }){
         const query = { productorId };
         const sections =  await this.mongodb.getAll(this.collection, query);
@@ -22,25 +19,31 @@ class SectionService{
         return createdSectionId;
     }
 
-    async createUnit({ sectionId, unit }){
-        const createdUnitId = await this.mongodb.update(this.collection, { _id: sectionId }, { $push: { units: unit }});
+    async createUnit({ productorId, sectionId, unit }){
+        const createdUnitId = await this.mongodb.update(this.collection, { _id: sectionId, productorId }, { $push: { units: unit }});
         return createdUnitId;
     }
 
-    async updateUnit({ sectionId, unitId, unit }){
-        const updatedUnitId = await this.mongodb.update(this.collection, { "_id": sectionId, "units._id": unitId }, { $set: {"units.$": unit} }, { upsert: false });
+    async updateUnit({ productorId, sectionId, unitId, unit }){
+        const updatedUnitId = await this.mongodb.update(this.collection, { "_id": sectionId, productorId, "units._id": unitId }, { $set: {"units.$": unit} }, { upsert: false });
         return updatedUnitId;
     }
 
-    async updateSection({ sectionId, section }){
-        const updatedSection = await this.mongodb.update(this.collection, { "_id": sectionId}, { $set: section });
+    async updateSection({ productorId, sectionId, section }){
+        const updatedSection = await this.mongodb.update(this.collection, { "_id": sectionId, productorId }, { $set: section });
         return updatedSection;
     }
 
-    async deleteSection({ sectionId }){
-        const deletedSection = await this.mongodb.delete(this.collection, sectionId);
+    async deleteSection({ productorId, sectionId }){
+        const deletedSection = await this.mongodb.delete(this.collection, { _id: sectionId, productorId });
         return deletedSection;
     }
+
+    async deleteUnit({ sectionId, unitId }){
+        const deleteUnitId = await this.mongodb.update(this.collection, { "_id": sectionId }, { $pull: { "units._id": unitId }  } );
+        return deleteUnitId;
+    }
+
 }
 
 module.exports = SectionService;

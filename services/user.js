@@ -42,7 +42,7 @@ class UserService{
     }
 
     async deleteUser({ userId }){
-        const deletedProduct = await this.mongodb.delete(this.collection, userId);
+        const deletedProduct = await this.mongodb.delete(this.collection, { _id: ObjectId(userId) });
         return deletedProduct;
     }
 }
