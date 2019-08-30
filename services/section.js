@@ -23,13 +23,12 @@ class SectionService{
     }
 
     async createUnit({ sectionId, unit }){
-        const createdUnitId = await this.mongodb.updateArrayPush(this.collection, { _id:  sectionId }, unit);
+        const createdUnitId = await this.mongodb.update(this.collection, { _id: sectionId }, { $push: { units: unit }});
         return createdUnitId;
     }
 
     async updateUnit({ sectionId, unitId, unit }){
-        const query = {  }
-        const updatedUnitId = await this.mongodb.updateArraySet(this.collection, {_id: sectionId, "units._id": unitId}, unit);
+        const updatedUnitId = await this.mongodb.update(this.collection, { "_id": sectionId, "units._id": unitId }, { $set: {"units.$": unit} }, { upsert: false });
         return updatedUnitId;
     }
 

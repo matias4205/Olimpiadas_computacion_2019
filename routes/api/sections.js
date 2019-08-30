@@ -58,7 +58,7 @@ router.post('/unit', passport.authenticate('jwt', { session: false }), validatio
 });
 
 router.put('/unit', passport.authenticate('jwt', { session: false }), validationHandler(updateUnitSchema), async (req, res, next) => {
-    const { sectionId, unitId, unit } = req.body;
+    const { sectionId, unit, unit: { _id: unitId } } = req.body;
 
     try {
         const updatedSectionId = await sectionService.updateUnit({ sectionId, unitId, unit });

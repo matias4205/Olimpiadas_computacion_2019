@@ -1,5 +1,7 @@
-const MongoLib = require('../lib/mongo');
 const bcrypt = require('bcryptjs');
+const { ObjectId } = require('mongodb');
+
+const MongoLib = require('../lib/mongo');
 
 const { userConfig: { administratorUserDefaultScopes, operatorUserDefaultScopes } } = require('../config');
 
@@ -35,7 +37,7 @@ class UserService{
     }
 
     async updateUser({ userId, user }){
-        const updatedUser = await this.mongodb.update(this.collection, userId, user);
+        const updatedUser = await this.mongodb.update(this.collection, { _id: ObjectId(userId) }, { $set: user }, { upsert: false });
         return updatedUser;
     }
 
