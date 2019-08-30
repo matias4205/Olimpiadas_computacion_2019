@@ -3,7 +3,7 @@ const path = require('path');
 const helmet = require('helmet');
 
 const apiAuthRouter = require('./routes/api/auth');
-const apiUserRouter = require('./routes/api/user');
+const apiUserRouter = require('./routes/api/users');
 const apiProductorRouter = require('./routes/api/productor');
 const apiSectionsRouter = require('./routes/api/sections');
 const apiReadingsRouter = require('./routes/api/readings');

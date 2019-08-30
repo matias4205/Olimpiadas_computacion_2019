@@ -33,7 +33,7 @@ class SectionService{
     }
 
     async updateSection({ sectionId, section }){
-        const updatedSection = await this.mongodb.update(this.collection, sectionId, section);
+        const updatedSection = await this.mongodb.update(this.collection, { "_id": sectionId}, { $set: section });
         return updatedSection;
     }
 

@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const { createSectionSchema, updateSectionSchema, createUnitSchema, updateUnitSchema } = require('../../utils/schemas/section');
-const { mongoIdSchema } = require('../../utils/schemas/general');
+const { createSectionSchema, updateSectionSchema, createUnitSchema, updateUnitSchema, sectionIdSchema } = require('../../utils/schemas/section');
 const validationHandler = require('../../utils/middlewares/validationHandler');
 
 const SectionsService = require('../../services/section');
@@ -72,7 +71,7 @@ router.put('/unit', passport.authenticate('jwt', { session: false }), validation
     }
 });
 
-router.put('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: mongoIdSchema }, 'params'), validationHandler(updateSectionSchema), async (req, res, next) => {
+router.put('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: sectionIdSchema }, 'params'), validationHandler(updateSectionSchema), async (req, res, next) => {
     const { productorId } = req.user;
     const { sectionId } = req.params;
     const { body: section } = req;
@@ -89,7 +88,7 @@ router.put('/:sectionId', passport.authenticate('jwt', { session: false }), vali
     }
 });
 
-router.delete('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: mongoIdSchema }, 'params'), async (req, res, next) => {
+router.delete('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: sectionIdSchema }, 'params'), async (req, res, next) => {
     const { sectionId } = req.params;
 
     try {

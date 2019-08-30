@@ -1,5 +1,7 @@
 const MongoLib = require('../lib/mongo');
 
+const readingsJoinQueryBuilder = require('../utils/readingsJoinQueryBuilder');
+
 class ReadingsService{    
     constructor(){
         this.collection = 'readings';
@@ -7,7 +9,9 @@ class ReadingsService{
     }
 
     async getReadings({ productorId }){
-        const readings = await this.mongodb.getAll(this.collection, { productorId });
+        const query = readingsJoinQueryBuilder(productorId);
+        console.log(query);
+        const readings = await this.mongodb.aggregate('sections', query);
         return readings || [];
     }
 
