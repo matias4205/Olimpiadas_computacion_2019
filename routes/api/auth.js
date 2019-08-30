@@ -3,7 +3,7 @@ const passport = require('passport');
 const boom = require('boom');
 const jwt = require('jsonwebtoken');
 
-const { adminConfig } = require('../../config');
+const { adminConfig, srvConfig } = require('../../config');
 const { signUpSchema } = require('../../utils/schemas/auth');
 const validationHandler = require('../../utils/middlewares/validationHandler');
 const UserService = require('../../services/user');
@@ -31,7 +31,10 @@ router.post('/sign-in', (req, res, next) => {
                 expiresIn: '15m'
             });
             
-            return res.status(200).json({ token: token });
+            res.cookie('token', token, {
+                httpOnly: !srvConfig.dev
+            });
+            return res.status(200).json({ token });
         });
     })(req, res, next);
 });
