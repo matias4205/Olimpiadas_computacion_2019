@@ -4,10 +4,13 @@ const boom = require('boom');
 const jwt = require('jsonwebtoken');
 
 const { adminConfig } = require('../../config');
-const { createUserSchema } = require('../../utils/schemas/user');
+const { signUpSchema } = require('../../utils/schemas/auth');
 const validationHandler = require('../../utils/middlewares/validationHandler');
 const UserService = require('../../services/user');
+const ProductorService = require('../../services/productor');
+
 const userService = new UserService();
+const productorService = new ProductorService();
 
 //Basic strategy
 require('../../utils/strategies/basic');
@@ -33,14 +36,18 @@ router.post('/sign-in', (req, res, next) => {
     })(req, res, next);
 });
 
-router.post('/sign-up', validationHandler(createUserSchema), async (req, res, next) => {
-    const { body: user } = req;
+router.post('/sign-up', validationHandler(signUpSchema), async (req, res, next) => {
+    const { user, productor } = req.body;
 
     try {
-        const createUserId = await userService.createUser({ user });
+        const createdProductorId = await productorService.createProductor({ productor });
+        const createUserId = await userService.createUser({ user: { ...user, productorId: createdProductorId } });
         
         res.status(201).json({
-            data: createUserId,
+            data: {
+                createUserId,
+                createdProductorId
+            },
             message: 'User created succesfully'
         });
     } catch (err) {

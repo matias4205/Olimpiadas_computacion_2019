@@ -1,5 +1,4 @@
 const joi = require('joi');
-const { mongoIdSchema } = require('./general');
 
 const descriptionSchema = joi.string().max(50).allow('').optional();
 
