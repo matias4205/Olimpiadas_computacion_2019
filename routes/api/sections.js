@@ -90,22 +90,6 @@ router.put('/:sectionId', passport.authenticate('jwt', { session: false }), vali
     }
 });
 
-router.delete('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: sectionIdSchema }, 'params'), async (req, res, next) => {
-    const { sectionId } = req.params;
-    const { productorId } = req.user;
-
-    try {
-        const deletedSectionId = await sectionService.deleteSection({ productorId, sectionId });
-        
-        res.status(200).json({
-            data: deletedSectionId,
-            message: 'Section deleted succesfuly'
-        });
-    } catch (err) {
-        next(err);
-    }
-});
-
 router.delete('/unit', passport.authenticate('jwt', { session: false }), validationHandler(deleteUnitSchema), async (req, res, next) => {
     const { sectionId, unitId } = req.body;
     const { productorId } = req.user;
@@ -116,6 +100,22 @@ router.delete('/unit', passport.authenticate('jwt', { session: false }), validat
         res.status(200).json({
             data: deletedUnitId,
             message: 'Unit updated succesfuly'
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.delete('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: sectionIdSchema }, 'params'), async (req, res, next) => {
+    const { sectionId } = req.params;
+    const { productorId } = req.user;
+
+    try {
+        const deletedSectionId = await sectionService.deleteSection({ productorId, sectionId });
+        
+        res.status(200).json({
+            data: deletedSectionId,
+            message: 'Section deleted succesfuly'
         });
     } catch (err) {
         next(err);

@@ -25,7 +25,7 @@ const updateUnitSchema = joi.object({
 const deleteUnitSchema = joi.object({
     sectionId: sectionIdSchema.required(),
     unitId: joi.string().max(5).required()
-})
+});
 
 module.exports = {
     sectionIdSchema,
