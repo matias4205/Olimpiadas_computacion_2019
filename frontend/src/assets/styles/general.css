@@ -30,3 +30,7 @@
 .info-hoverable:hover::after{
     display: inline-block;
 }
+
+.full-height-container{
+    height: 100vh !important;
+}

@@ -37,6 +37,12 @@ const SideBar = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/sections">
+                            <i className="fa fa-pencil"></i>
+                            <span>Manage Sections</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/users">
                             <i className="fa fa-user"></i>
                             <span>Manage Users</span>

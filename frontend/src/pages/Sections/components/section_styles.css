@@ -1,0 +1,66 @@
+.id {
+  width: 70px;
+}
+
+.actions {
+  width: 140px;
+}
+
+.actions .action-button{
+  background-color: none;
+  border-radius: 50%;
+  height: 27px;
+  width: 27px;
+  border-color: none;
+  border-width: 1px;
+  box-shadow: none;
+  margin-right: 8px;
+}
+
+.actions .action-button:last-child{
+  margin-right: 0px !important;
+}
+
+.action-button.edit{
+  color: rgb(21, 97, 226);
+  border-color: rgb(21, 97, 226);
+}
+
+.action-button.delete{
+  color: #c73346;
+  border-color: #c73346;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 !important;
+}
+
+.masonry { /* Masonry container */
+  column-gap: 1em;
+}
+
+.item { /* Masonry bricks or child elements */
+  display: inline-block !important;
+  width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .masonry {
+    column-count: 1;
+  }
+}
