@@ -39,8 +39,8 @@ class SectionService{
         return deletedSection;
     }
 
-    async deleteUnit({ sectionId, unitId }){
-        const deleteUnitId = await this.mongodb.update(this.collection, { "_id": sectionId }, { $pull: { "units._id": unitId }  } );
+    async deleteUnit({ productorId, sectionId, unitId }){
+        const deleteUnitId = await this.mongodb.update(this.collection, { "_id": sectionId, productorId }, { $pull: { "units._id": unitId }  } );
         return deleteUnitId;
     }
 

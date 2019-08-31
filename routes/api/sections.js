@@ -59,9 +59,10 @@ router.post('/unit', passport.authenticate('jwt', { session: false }), validatio
 
 router.put('/unit', passport.authenticate('jwt', { session: false }), validationHandler(updateUnitSchema), async (req, res, next) => {
     const { sectionId, unit, unit: { _id: unitId } } = req.body;
+    const { productorId } = req.user
 
     try {
-        const updatedSectionId = await sectionService.updateUnit({ sectionId, unitId, unit });
+        const updatedSectionId = await sectionService.updateUnit({ productorId, sectionId, unitId, unit });
         
         res.status(200).json({
             data: updatedSectionId,
@@ -107,9 +108,10 @@ router.delete('/:sectionId', passport.authenticate('jwt', { session: false }), v
 
 router.delete('/unit', passport.authenticate('jwt', { session: false }), validationHandler(deleteUnitSchema), async (req, res, next) => {
     const { sectionId, unitId } = req.body;
+    const { productorId } = req.user;
 
     try {
-        const deletedUnitId = await sectionService.deleteUnit({ sectionId, unitId });
+        const deletedUnitId = await sectionService.deleteUnit({ productorId, sectionId, unitId });
         
         res.status(200).json({
             data: deletedUnitId,
