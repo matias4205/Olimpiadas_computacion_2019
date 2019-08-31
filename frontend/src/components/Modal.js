@@ -20,12 +20,13 @@ const Modal = (props) => {
                         {props.children}
                     </div>
                     <div className="modal-footer">
-
+                        <button className="btn btn-default" onClick={props.onClose}>Cancel</button>
+                        <button className="btn btn-primary">Confirm</button>
                     </div>
                 </div>
             </div>
         </div>,
-        document.getElementById('delete_modal')
+        document.getElementById('modal')
     );
 };
 

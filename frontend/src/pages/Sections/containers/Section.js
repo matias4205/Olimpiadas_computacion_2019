@@ -233,10 +233,12 @@ class Section extends Component {
     toggleDeleteModal = e => {
         if(this.state.deleteModalIsOpened){
             this.setState({
+                test: e,
                 deleteModalIsOpened: false
             })
         } else {
             this.setState({
+                test: e,
                 deleteModalIsOpened: true
             })
         }
@@ -250,19 +252,28 @@ class Section extends Component {
                     <div className="masonry">
                         {this.state.data.map(index => {
                             return (
-                                <SectionLayout stateId={index.id} units={index.units} openEditModal={this.toggleEditModal} openDeleteModal={this.toggleDeleteModal}/>
+                                <SectionLayout
+                                    stateId={index.id}
+                                    units={index.units}
+                                    openEditModal={this.toggleEditModal}
+                                    openDeleteModal={this.toggleDeleteModal}
+                                />
                             );
                         })}
                         <Modal
                             isOpen={this.state.editModalIsOpened}
                             onClose={this.toggleEditModal}
-                            title={"Edit unit description"}
-                        />
+                            title={`Unit ${this.props.test}`}
+                        >
+                            Do you really want to delete this unit?
+                        </Modal>
                         <Modal
                             isOpen={this.state.deleteModalIsOpened}
                             onClose={this.toggleDeleteModal}
-                            title={"Do you really want to delete this unit?"}
-                        />
+                            title={`Edit unit ${this.props.test} description`}
+                        >
+                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        </Modal>
                     </div>
                 </section>
             </React.Fragment>
