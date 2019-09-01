@@ -4,8 +4,13 @@
     justify-content: center !important;
 }
 
-.login-container .login-box{
-    margin-top: -100px !important;
+.login-container .login-center{
+    margin-top: -50px !important;
+}
+
+.login{
+    width: 800px;
+    height: 550px;
 }
 
 .login-box-body{

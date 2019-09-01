@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Redirect
-}from 'react-router-dom';
+} from 'react-router-dom';
 
 import Layout from "./components/Layout";
 import Profile from './pages/Profile/containers/Profile';
@@ -31,6 +31,20 @@ function App() {
         </Layout>
       </Switch>
     </BrowserRouter>
+    // <BrowserRouter>
+    //   <Layout>
+    //     <Switch>
+    //       <Route exact path="/" render={() => (<Redirect to='/dashboard/quick' />)}/>
+    //       <Route exact path="/sections" component={Section} />
+    //       <Route exact path="/profile/:userId" component={Profile} />
+    //       <Route exact path="/dashboard" render={() => (<Redirect to='/dashboard/quick' />)} />
+    //       <Route exact path="/dashboard/quick" component={QuickView} />
+    //       <Route exact path="/sign-in" component={SignIn} />
+    //       <Route exact path="/sign-up" component={SignUp} />
+    //       <Route>404 Not Found</Route>
+    //     </Switch>
+    //   </Layout>
+    // </BrowserRouter>
   );
 }
 

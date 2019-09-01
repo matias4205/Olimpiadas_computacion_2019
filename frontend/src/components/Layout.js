@@ -4,15 +4,25 @@ import SideBar from '../components/SideBar'
 import Header from '../components/Header';
 
 const Layout = (props) => {
-    return (
-        <React.Fragment>
-            <Header />
-            <SideBar />
-            <div className="content-wrapper">
+    if (props.Layout !== false) {
+        return (
+            <React.Fragment>
+                <Header />
+                <SideBar />
+                <div className="content-wrapper">
+                    {props.children}
+                </div>
+            </React.Fragment>
+        );
+    }
+    else {
+        return (
+            <React.Fragment>
                 {props.children}
-            </div>
-        </React.Fragment>
-    );
+                {props.Layout}
+            </React.Fragment>
+        );
+    }
 };
 
 export default Layout;
