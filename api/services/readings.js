@@ -10,7 +10,6 @@ class ReadingsService{
 
     async getReadings({ productorId }){
         const query = readingsJoinQueryBuilder(productorId);
-        console.log(query);
         const readings = await this.mongodb.aggregate('sections', query);
         return readings || [];
     }
