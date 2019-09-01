@@ -31,7 +31,7 @@ router.post('/sign-in', (req, res, next) => {
                 expiresIn: '15m'
             });
 
-            return res.status(200).json({ token });
+            return res.status(200).json({ token, user });
         });
     })(req, res, next);
 });
