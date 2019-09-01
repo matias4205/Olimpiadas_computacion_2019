@@ -30,10 +30,7 @@ router.post('/sign-in', (req, res, next) => {
             const token = jwt.sign(payload, adminConfig.authJwtSecret, { // Firma de json web tokens
                 expiresIn: '15m'
             });
-            
-            res.cookie('token', token, {
-                httpOnly: !srvConfig.dev
-            });
+
             return res.status(200).json({ token });
         });
     })(req, res, next);

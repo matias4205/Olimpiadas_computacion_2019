@@ -42,11 +42,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), validationHan
 });
 
 router.post('/unit', passport.authenticate('jwt', { session: false }), validationHandler(createUnitSchema), async (req, res, next) => {
-    const { sectionId, unit } = req.body;
+    const { sectionName, unit } = req.body;
     const { productorId } = req.user;
 
     try {
-        const updatedSectionId = await sectionService.createUnit({ productorId, sectionId, unit });
+        const updatedSectionId = await sectionService.createUnit({ productorId, sectionName, unit });
         
         res.status(200).json({
             data: updatedSectionId,
@@ -58,11 +58,11 @@ router.post('/unit', passport.authenticate('jwt', { session: false }), validatio
 });
 
 router.put('/unit', passport.authenticate('jwt', { session: false }), validationHandler(updateUnitSchema), async (req, res, next) => {
-    const { sectionId, unit, unit: { _id: unitId } } = req.body;
-    const { productorId } = req.user
+    const { sectionName, unit, unit: { unitName } } = req.body;
+    const { productorId } = req.user;
 
     try {
-        const updatedSectionId = await sectionService.updateUnit({ productorId, sectionId, unitId, unit });
+        const updatedSectionId = await sectionService.updateUnit({ productorId, sectionName, unitName, unit });
         
         res.status(200).json({
             data: updatedSectionId,
@@ -73,13 +73,13 @@ router.put('/unit', passport.authenticate('jwt', { session: false }), validation
     }
 });
 
-router.put('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: sectionIdSchema }, 'params'), validationHandler(updateSectionSchema), async (req, res, next) => {
+router.put('/:sectionName', passport.authenticate('jwt', { session: false }), validationHandler({ sectionName: sectionIdSchema }, 'params'), validationHandler(updateSectionSchema), async (req, res, next) => {
     const { productorId } = req.user;
-    const { sectionId } = req.params;
+    const { sectionName } = req.params;
     const { body: section } = req;
 
     try {
-        const updatedSectionId = await sectionService.updateSection({ productorId, sectionId, section });
+        const updatedSectionId = await sectionService.updateSection({ productorId, sectionName, section });
         
         res.status(200).json({
             data: updatedSectionId,
@@ -91,11 +91,11 @@ router.put('/:sectionId', passport.authenticate('jwt', { session: false }), vali
 });
 
 router.delete('/unit', passport.authenticate('jwt', { session: false }), validationHandler(deleteUnitSchema), async (req, res, next) => {
-    const { sectionId, unitId } = req.body;
+    const { sectionName, unitName } = req.body;
     const { productorId } = req.user;
 
     try {
-        const deletedUnitId = await sectionService.deleteUnit({ productorId, sectionId, unitId });
+        const deletedUnitId = await sectionService.deleteUnit({ productorId, sectionName, unitName });
         
         res.status(200).json({
             data: deletedUnitId,
@@ -106,12 +106,12 @@ router.delete('/unit', passport.authenticate('jwt', { session: false }), validat
     }
 });
 
-router.delete('/:sectionId', passport.authenticate('jwt', { session: false }), validationHandler({ sectionId: sectionIdSchema }, 'params'), async (req, res, next) => {
-    const { sectionId } = req.params;
+router.delete('/:sectionName', passport.authenticate('jwt', { session: false }), validationHandler({ sectionName: sectionIdSchema }, 'params'), async (req, res, next) => {
+    const { sectionName } = req.params;
     const { productorId } = req.user;
 
     try {
-        const deletedSectionId = await sectionService.deleteSection({ productorId, sectionId });
+        const deletedSectionId = await sectionService.deleteSection({ productorId, sectionName });
         
         res.status(200).json({
             data: deletedSectionId,

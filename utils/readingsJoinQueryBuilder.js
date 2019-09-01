@@ -12,14 +12,14 @@ module.exports = (productorId) => [
     {
         $lookup: {
             from: 'readings',
-            let: { section_productorId: "$productorId", section_unitId: "$units._id" },
+            let: { section_productorId: "$productorId", section_unitName: "$units.unitName" },
             pipeline: [
               { $match:
                  { $expr:
                     { $and:
                        [
                          { $eq: [ "$productorId",  "$$section_productorId" ] },
-                         { $eq: [ "$unitId", "$$section_unitId" ] }
+                         { $eq: [ "$unitName", "$$section_unitName" ] }
                        ]
                     }
                  }

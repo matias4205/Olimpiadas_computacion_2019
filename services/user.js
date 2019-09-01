@@ -30,7 +30,7 @@ class UserService{
 
     async createUser({ user }){
         const hashedPassword = await bcrypt.hash(user.password, 10);
-        const scopes = user.role === 'admin' ? administratorUserDefaultScopes : operatorUserDefaultScopes;
+        const scopes = user.role === 'administrator' ? administratorUserDefaultScopes : operatorUserDefaultScopes;
         
         const createdUserId = await this.mongodb.create(this.collection, { ...user, password: hashedPassword, scopes });
         return createdUserId;
