@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const passport = require('passport');
 
-const validation = require('../../utils/middlewares/validationHandler');
-const { createProductorSchema } = require('../../utils/schemas/productor');
-const ProdutorService = require('../../services/productor');
+const validation = require('../../utils/middlewares/validationHandler'); // Validator handler to use our schemas
+const { createProductorSchema } = require('../../utils/schemas/productor'); // Schemas to test the received data
+const ProdutorService = require('../../services/productor'); // Our productor service
 
 //Services
 const productorService = new ProdutorService();
@@ -11,7 +11,7 @@ const productorService = new ProdutorService();
 //Stragegies
 require('../../utils/strategies/jwt');
 
-//Get a data of the user productor
+//Get a data of the user's productor
 router.get('/', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
     const { productorId } = req.user;
 
@@ -27,9 +27,9 @@ router.get('/', passport.authenticate('jwt', { session: false }), async (req, re
     }
 });
 
-//Create a productor
+//Create a productor (Unutilized)
 router.post('/', validation(createProductorSchema), async (req, res, next) => {
-    const { body: productor } = req;
+    const { body: productor } = req; //Getting the productor data
 
     try{
         const createdProductorId = await productorService.createProductor({ productor });

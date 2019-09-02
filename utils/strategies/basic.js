@@ -8,24 +8,24 @@ const MongoLib = require('../../lib/mongo');
 
 passport.use(
     new BasicStrategy( async (email, password, done)=>{
-        const mongoDB = new MongoLib();
+        const mongoDB = new MongoLib(); //Inits the mongoDb library
 
         try{
-            const [user] = await mongoDB.getAll('users', { email });
+            const [user] = await mongoDB.getAll('users', { email }); //Gets all the users with the email
             
             if(!user) {
-                return done(boom.unauthorized(), false);
+                return done(boom.unauthorized(), false); //If no users were returned triggers unauthorized
             }
 
-            if(!await bcrypt.compare(password, user.password)){
-                return done(boom.unauthorized(), false);
+            if(!await bcrypt.compare(password, user.password)){ //Bcrypt compares the sended password with the user's stored password
+                return done(boom.unauthorized(), false); //If They dont match, Unauthorized
             }
 
-            delete user.password;
+            delete user.password; //Password field is deleted for avoiding security issues
 
-            return done(null, user);
+            return done(null, user); //Returns a null for the error and the given user with all the data from the db
         }catch(err){
-            return done(err);
+            return done(err); //Executes de error callback
         }
     })
 );
