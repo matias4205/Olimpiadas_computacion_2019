@@ -5,10 +5,19 @@ const boom = require('boom');
 const UserService = require('../../services/user')
 const { adminConfig } = require('../../config');
 
+var cookieExtractor = function(req) {
+    var token = null;
+    if (req && req.cookies)
+    {
+        token = req.cookies['token'];
+    }
+    return token;
+};
+
 passport.use(
     new Strategy({
         secretOrKey: adminConfig.authJwtSecret,
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+        jwtFromRequest: cookieExtractor
     },
     
     async (tokenPayload, done) => {

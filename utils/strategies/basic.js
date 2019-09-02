@@ -7,9 +7,7 @@ const MongoLib = require('../../lib/mongo');
 
 
 passport.use(
-    new BasicStrategy({
-        usernameField: 'email'
-    }, async (email, password, done)=>{
+    new BasicStrategy( async (email, password, done)=>{
         const mongoDB = new MongoLib();
 
         try{
