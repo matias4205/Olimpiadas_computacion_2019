@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://181.229.213.140:5555';
+const API_URL = 'http://localhost:4000';
 
 export const signIn = (password, email) => axios({
     url: `${API_URL}/api/auth/sign-in`,
