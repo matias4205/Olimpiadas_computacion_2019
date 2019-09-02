@@ -13,18 +13,18 @@ const SignInLayout = (props) => {
                 </div>
                 <div className="login-box-body">
                     <p className="login-box-msg">Sign in to start your session</p>
-                    <form action="../../index2.html" method="post">
+                    <form action="../../index2.html" method="post" onSubmit={props.onSubmit}>
                         <div className="form-group has-feedback">
-                            <input type="email" className="form-control" placeholder="Email" />
+                            <input type="email" name="email" value={props.formValues.email} className="form-control" placeholder="Email" onChange={props.onChange}/>
                             <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
                         <div className="form-group has-feedback">
-                            <input type="password" className="form-control" placeholder="Password" />
+                            <input type="password" name="password" value={props.formValues.password} className="form-control" placeholder="Password" onChange={props.onChange}/>
                             <span className="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
                         <div className="row">
                             <div className="col-xs-8">
-                                <div class="checkbox icheck">
+                                <div className="checkbox icheck">
                                     <label>
                                         <input type="checkbox" /> Remember Me
                                     </label>

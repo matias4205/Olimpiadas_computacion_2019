@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import SignUpLayout from '../components/SignUpLayout';
 
-import axios from 'axios';
+import { signUp } from '../../../utils/api';
 
 class SignUp extends Component {
     constructor(props) {
@@ -63,24 +63,7 @@ class SignUp extends Component {
         e.preventDefault();
         if(this.checkErrors() === false && this.emptyInputs() === false){
             try {
-                const { data, status } = await axios.post({
-                    url: `http://181.229.213.140:5555/api/auth/sign-up`,
-                    data: {
-                        "user": {
-                            "firstName": this.state.form.personal.firstName,
-                            "lastName": this.state.form.personal.lastName,
-                            "role": "administrator",
-                            "email": this.state.form.personal.email,
-                            "password": this.state.form.personal.password
-                        },
-                        "productor": {
-                            "comercialDenomination": this.state.form.company.comercialDenomination,
-                            "ownerCompany": this.state.form.company.ownerCompany,
-                            "fiscalCode": this.state.form.company.fiscalCode,
-                            "addres": this.state.form.company.address
-                        }
-                    }
-                });
+                const { data, status } = await signUp(this.state.form);
             } catch (error) {
                 console.log(error);
             }
