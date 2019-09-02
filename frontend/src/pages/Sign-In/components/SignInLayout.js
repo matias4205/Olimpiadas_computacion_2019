@@ -7,7 +7,7 @@ import '../../Sign-Up/components/styles/styles.css';
 const SignInLayout = (props) => {
     return (
         <div className="full-height-container login-container">
-            <div className="login-box no-margin">
+            <div className="login-box no-margin login-center">
                 <div className="login-logo">
                     <p className="text-white">Sign In</p>
                 </div>

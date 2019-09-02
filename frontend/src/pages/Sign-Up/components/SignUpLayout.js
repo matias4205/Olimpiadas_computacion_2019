@@ -7,39 +7,70 @@ import './styles/styles.css';
 const SignUpLayout = (props) => {
     return (
         <div className="full-height-container login-container">
-            <div className="login-box no-margin">
+            <div className="login-box no-margin login">
                 <div className="register-logo">
-                   <p className="text-white">Register</p>
+                    <p className="text-white">Register</p>
                 </div>
-                <div className="login-box-body">
-                    <p className="login-box-msg">Register a new membership</p>
-                    <form action="../../index.html" method="post">
-                        <div className="form-group has-feedback">
-                            <input type="text" className="form-control" placeholder="Full name" />
-                            <span className="glyphicon glyphicon-user form-control-feedback"></span>
+                <form action="../../index.html" method="post" onSubmit={props.onSubmit}>
+                    <div className="login-box-body">
+                        <div className="col-lg-6 col-md-6">
+                            <p className="login-box-msg">Personal data</p>
+                            <div className="form-group has-feedback">
+                                <input type="text" name="firstName" value={props.formValues.personal.firstName} className="form-control" placeholder="Full name" onChange={props.onChange}/>
+                                <span className="glyphicon glyphicon-user form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.firstNameRegex}</span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="text" name="lastName" value={props.formValues.personal.lastName} className="form-control" placeholder="Last name" onChange={props.onChange}/>
+                                <span className="glyphicon glyphicon-user form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.lastNameRegex}</span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="email" name="email" value={props.formValues.personal.email} className="form-control" placeholder="Email" onChange={props.onChange}/>
+                                <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.validEmail}</span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="password" name="password" value={props.formValues.personal.password} className="form-control" placeholder="Password" onChange={props.onChange}/>
+                                <span className="glyphicon glyphicon-lock form-control-feedback"></span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="password" name="confirmPassword" value={props.formValues.personal.confirmPassword} className="form-control" placeholder="Retype password" onChange={props.onChange}/>
+                                <span className="glyphicon glyphicon-log-in form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.matchPasswords}</span>
+                            </div>
                         </div>
-                        <div className="form-group has-feedback">
-                            <input type="email" className="form-control" placeholder="Email" />
-                            <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        <div className="col-lg-6 col-md-6">
+                            <p className="login-box-msg">Company data</p>
+                            <div className="form-group has-feedback">
+                                <input type="text" name="comercialDenomination" value={props.formValues.company.comercialDenomination} className="form-control" placeholder="Comercial denomination" onChange={props.onChange}/>
+                                <span className="glyphicon form-control-feedback"></span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="text" name="ownerCompany" value={props.formValues.company.ownerCompany} className="form-control" placeholder="Owner company" onChange={props.onChange}/>
+                                <span className="glyphicon form-control-feedback"></span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="text" name="fiscalCode" value={props.formValues.company.fiscalCode} className="form-control" placeholder="Fiscal code" onChange={props.onChange}/>
+                                <span className="glyphicon form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.fiscalCode}</span>
+                            </div>
+                            <div className="form-group has-feedback">
+                                <input type="text" name="address" value={props.formValues.company.address} className="form-control" placeholder="Address" onChange={props.onChange}/>
+                                <span className="glyphicon form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.required}</span>
+                            </div>
                         </div>
-                        <div className="form-group has-feedback">
-                            <input type="password" className="form-control" placeholder="Password" />
-                            <span className="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <div className="row">
+                            <div className="col-xs-4 col-xs-offset-8">
+                                <button type="submit" className="btn btn-primary btn-block btn-flat">Register</button>
+                                <Link to="/sign-in" className="text-center">I already have a membership</Link>
+                            </div>
                         </div>
-                        <div className="form-group has-feedback">
-                            <input type="password" className="form-control" placeholder="Retype password" />
-                            <span className="glyphicon glyphicon-log-in form-control-feedback"></span>
-                        </div>
-                    </form>
-                    <div className="social-auth-links text-center">
-                        <p>- OR -</p>
-                        <a href="#" className="btn btn-block btn-social btn-facebook btn-flat"><i className="fa fa-facebook"></i> Sign up using Facebook</a>
-                        <a href="#" className="btn btn-block btn-social btn-google btn-flat"><i className="fa fa-google-plus"></i> Sign up using Google+</a>
                     </div>
-                    <Link to="/sign-in" className="text-center">I already have a membership</Link>
-                </div>
+                </form>
             </div>
-        </div>
+        </div >
     );
 };
 
