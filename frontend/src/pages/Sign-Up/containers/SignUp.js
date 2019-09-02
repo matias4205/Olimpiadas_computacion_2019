@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import SignUpLayout from '../components/SignUpLayout';
 
+import axios from 'axios';
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
@@ -12,17 +14,7 @@ class SignUp extends Component {
                 firstNameRegex: '',
                 lastNameRegex: '',
                 fiscalCodeTrim: '',
-                required: {
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: '',
-                    comercialDenomination: '',
-                    ownerCompany: '',
-                    fiscalCode: '',
-                    address: ''
-                }
+                required: ''
             },
             form: {
                 personal: {
@@ -30,7 +22,7 @@ class SignUp extends Component {
                     lastName: '',
                     email: '',
                     password: '',
-                    confirmPassword: '',
+                    confirmPassword: ''
                 },
                 company: {
                     comercialDenomination: '',
@@ -67,14 +59,37 @@ class SignUp extends Component {
         this.checkErrors();
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        if(this.checkErrors() === false){
-            e.preventDefault();
+        if(this.checkErrors() === false && this.emptyInputs() === false){
+            try {
+                const { data, status } = await axios.post({
+                    url: `http://181.229.213.140:5555/api/auth/sign-up`,
+                    data: {
+                        "user": {
+                            "firstName": this.state.form.personal.firstName,
+                            "lastName": this.state.form.personal.lastName,
+                            "role": "administrator",
+                            "email": this.state.form.personal.email,
+                            "password": this.state.form.personal.password
+                        },
+                        "productor": {
+                            "comercialDenomination": this.state.form.company.comercialDenomination,
+                            "ownerCompany": this.state.form.company.ownerCompany,
+                            "fiscalCode": this.state.form.company.fiscalCode,
+                            "addres": this.state.form.company.address
+                        }
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
     checkErrors = () => {
+        let errors = false;
+
         if(this.state.form.personal.confirmPassword !== this.state.form.personal.password){
             this.setState({
                 formErrors: {
@@ -82,6 +97,7 @@ class SignUp extends Component {
                     matchPasswords: 'Passwords doesn´t match',
                 }
             });
+            errors = true;
         } else {
             this.setState({
                 formErrors: {
@@ -95,9 +111,10 @@ class SignUp extends Component {
             this.setState({
                 formErrors: {
                     ...this.state.formErrors,
-                    validEmail: 'Please enter a valid email',
+                    validEmail: 'Please enter a valid email address',
                 }
             });
+            errors = true;
         } else {
             this.setState({
                 formErrors: {
@@ -114,6 +131,7 @@ class SignUp extends Component {
                     fiscalCodeTrim: 'Please enter a valid fiscal code',
                 }
             });
+            errors = true;
         } else {
             this.setState({
                 formErrors: {
@@ -130,6 +148,7 @@ class SignUp extends Component {
                     firstNameRegex: 'This field can not contain numbers nor symbols',
                 }
             });
+            errors = true;
         } else {
             this.setState({
                 formErrors: {
@@ -146,6 +165,7 @@ class SignUp extends Component {
                     lastNameRegex: 'This field can not contain numbers nor symbols',
                 }
             });
+            errors = true;
         } else {
             this.setState({
                 formErrors: {
@@ -154,9 +174,31 @@ class SignUp extends Component {
                 }
             });
         }
+
+        return errors;
     }
 
-    render() {
+    emptyInputs = () => {
+        if( !this.state.form.company.address || !this.state.form.company.comercialDenomination || !this.state.form.company.fiscalCode || !this.state.form.company.ownerCompany || !this.state.form.personal.firstName || !this.state.form.personal.lastName || !this.state.form.personal.email || !this.state.form.personal.password || !this.state.form.personal.confirmPassword ){
+            this.setState({
+                formErrors: {
+                    ...this.state.formErrors,
+                    required: 'You must fill each field',
+                }
+            });
+            return true;
+        } else {
+            this.setState({
+                formErrors: {
+                    ...this.state.formErrors,
+                    required: '',
+                }
+            });
+            return false;
+        }
+    }
+
+    render = () => {
         return (
             <React.Fragment>
                 <SignUpLayout

@@ -58,11 +58,12 @@ const SignUpLayout = (props) => {
                             <div className="form-group has-feedback">
                                 <input type="text" name="address" value={props.formValues.company.address} className="form-control" placeholder="Address" onChange={props.onChange}/>
                                 <span className="glyphicon form-control-feedback"></span>
+                                <span className="text-danger">{props.onError.required}</span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-4 col-xs-offset-8">
-                                <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                        <div className="row">
+                            <div className="col-xs-4 col-xs-offset-8">
+                                <button type="submit" className="btn btn-primary btn-block btn-flat">Register</button>
                                 <Link to="/sign-in" className="text-center">I already have a membership</Link>
                             </div>
                         </div>
