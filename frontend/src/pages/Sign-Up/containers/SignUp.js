@@ -18,17 +18,17 @@ class SignUp extends Component {
             },
             form: {
                 personal: {
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: ''
+                    firstName: 'Matias',
+                    lastName: 'Perez',
+                    email: 'matiasperezpc@hotmail.com',
+                    password: 'Puto1234',
+                    confirmPassword: 'Puto1234'
                 },
                 company: {
-                    comercialDenomination: '',
-                    ownerCompany: '',
-                    fiscalCode: '',
-                    address: ''
+                    comercialDenomination: 'Juanca',
+                    ownerCompany: 'Rlos',
+                    fiscalCode: 'sdlkfaj2451',
+                    address: 'La punta de la verga'
                 }
             }
         }
@@ -61,24 +61,21 @@ class SignUp extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        if(this.checkErrors() === false && this.emptyInputs() === false){
+        if(!this.checkErrors() && !this.emptyInputs()){
             try {
-                const { data, status } = await axios.post({
-                    url: `http://181.229.213.140:5555/api/auth/sign-up`,
-                    data: {
-                        "user": {
-                            "firstName": this.state.form.personal.firstName,
-                            "lastName": this.state.form.personal.lastName,
-                            "role": "administrator",
-                            "email": this.state.form.personal.email,
-                            "password": this.state.form.personal.password
-                        },
-                        "productor": {
-                            "comercialDenomination": this.state.form.company.comercialDenomination,
-                            "ownerCompany": this.state.form.company.ownerCompany,
-                            "fiscalCode": this.state.form.company.fiscalCode,
-                            "addres": this.state.form.company.address
-                        }
+                const { data, status } = await axios.post('http://localhost:4000/api/auth/sign-up', {
+                    "user": {
+                        "firstName": this.state.form.personal.firstName,
+                        "lastName": this.state.form.personal.lastName,
+                        "role": "administrator",
+                        "email": this.state.form.personal.email,
+                        "password": this.state.form.personal.password
+                    },
+                    "productor": {
+                        "comercialDenomination": this.state.form.company.comercialDenomination,
+                        "ownerCompany": this.state.form.company.ownerCompany,
+                        "fiscalCode": this.state.form.company.fiscalCode,
+                        "address": this.state.form.company.address
                     }
                 });
             } catch (error) {

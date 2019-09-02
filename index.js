@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path');
 const helmet = require('helmet');
+const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
 const apiAuthRouter = require('./routes/api/auth');
@@ -13,9 +14,10 @@ const { srvConfig } = require('./config');
 
 const app = express();
 
+app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
-app.use(helmet());
+// app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
