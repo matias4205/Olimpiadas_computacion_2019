@@ -22,6 +22,7 @@ const SignInLayout = (props) => {
                             <input type="password" name="password" value={props.formValues.password} className="form-control" placeholder="Password" onChange={props.onChange}/>
                             <span className="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
+                        <label className="text-danger">{props.onError}</label>
                         <div className="row">
                             <div className="col-xs-8">
                                 <div className="checkbox icheck">
