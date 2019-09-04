@@ -27,7 +27,7 @@ class SignIn extends Component {
     handleSubmit = async e => {
         e.preventDefault();
         try {
-            const { data, status } = await signIn(this.state.form.password, this.state.form.email);
+            const { data, status } = await signIn(this.state.form.email, this.state.form.password);
         } catch (error) {
             console.log(error);
         }

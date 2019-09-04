@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:4000';
 
-export const signIn = (password, email) => axios({
+export const signIn = (email, password) => axios({
     url: `${API_URL}/api/auth/sign-in`,
     method: 'post',
     auth: {
@@ -29,4 +29,8 @@ export const signUp = (data) => axios({
             "address": data.company.address
         }
     }
-})
+});
+
+export const getReadings = () => axios({
+    url: `${API_URL}/api/readings`
+});

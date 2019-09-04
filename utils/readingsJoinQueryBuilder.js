@@ -31,6 +31,9 @@ module.exports = (productorId) => [
     {
         $group: {
             _id: "$_id",
+            sectionName: {
+                '$first': '$sectionName'
+            },
             description: {
                 $first: "$description"
             },
