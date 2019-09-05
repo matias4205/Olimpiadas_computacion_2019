@@ -10,6 +10,9 @@ class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            modalIndex: 0,
+            modalSectionID: '',
+            modalUnitID: 1,
             deleteModalIsOpened: false,
             editModalIsOpened: false,
             data: [
@@ -43,7 +46,7 @@ class Section extends Component {
                         },
                         {
                             id: 2,
-                            description: 'test'
+                            description: 'aaaaaaaaaaaaa'
                         },
                     ]
                 },
@@ -102,7 +105,7 @@ class Section extends Component {
                     units: [
                         {
                             id: 1,
-                            description: 'test'
+                            description: 'tesssssst'
                         },
                         {
                             id: 2,
@@ -218,27 +221,31 @@ class Section extends Component {
         // }
     }
 
-    toggleEditModal = e => {
-        if(this.state.editModalIsOpened){
+    toggleEditModal = async (sectionID, unitID, index) => {
+        if (this.state.editModalIsOpened) {
             this.setState({
                 editModalIsOpened: false
             })
         } else {
-            this.setState({
+            await this.setState({
+                modalIndex: index,
+                modalSectionID: sectionID,
+                modalUnitID: unitID,
                 editModalIsOpened: true
             })
         }
     }
 
-    toggleDeleteModal = e => {
-        if(this.state.deleteModalIsOpened){
+    toggleDeleteModal = async (sectionID, unitID, index) => {
+        if (this.state.deleteModalIsOpened) {
             this.setState({
-                test: e,
                 deleteModalIsOpened: false
             })
         } else {
-            this.setState({
-                test: e,
+            await this.setState({
+                modalIndex: index,
+                modalSectionID: sectionID,
+                modalUnitID: unitID,
                 deleteModalIsOpened: true
             })
         }
@@ -250,11 +257,13 @@ class Section extends Component {
                 <ContentHeader title="Sections Management" subtitle="Manage sections and units" />
                 <section className="content">
                     <div className="masonry">
-                        {this.state.data.map(index => {
+                        {this.state.data.map((item, index) => {
                             return (
                                 <SectionLayout
-                                    stateId={index.id}
-                                    units={index.units}
+                                    key={item.id}
+                                    id={item.id}
+                                    section={index}
+                                    units={item.units}
                                     openEditModal={this.toggleEditModal}
                                     openDeleteModal={this.toggleDeleteModal}
                                 />
@@ -263,16 +272,16 @@ class Section extends Component {
                         <Modal
                             isOpen={this.state.editModalIsOpened}
                             onClose={this.toggleEditModal}
-                            title={`Unit ${this.props.test}`}
+                            title={`Unit ${this.state.modalSectionID}${this.state.modalUnitID}`}
                         >
                             Do you really want to delete this unit?
                         </Modal>
                         <Modal
                             isOpen={this.state.deleteModalIsOpened}
                             onClose={this.toggleDeleteModal}
-                            title={`Edit unit ${this.props.test} description`}
+                            title={`Edit unit ${this.state.modalSectionID}${this.state.modalUnitID} description`}
                         >
-                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            <textarea className="form-control" rows="3" value={this.state.data[this.state.modalIndex].units[this.state.modalUnitID - 1].description}></textarea>
                         </Modal>
                     </div>
                 </section>
