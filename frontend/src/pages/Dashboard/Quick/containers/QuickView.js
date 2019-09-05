@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import ContentHeader from '../../../../components/ContentHeader';
 import InfoBox from '../../../../components/InfoBox';

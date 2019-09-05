@@ -6,7 +6,7 @@ const Section = (props) => {
     return (
         <React.Fragment>
             <div className="box item">
-                <h1 className="box-header no-margin">{props.stateId}</h1>
+                <h1 className="box-header no-margin">{props.id}</h1>
                 <div className="box-body">
                     <table className="table">
                         <tbody>
@@ -17,14 +17,14 @@ const Section = (props) => {
                             </tr>
                             {props.units.map(item => {
                                 return (
-                                    <tr>
+                                    <tr key={item.id}>
                                         <td className="id">{item.id}</td>
                                         <td>{item.description}</td>
                                         <td className="actions text-center">
-                                            <button onClick={props.openEditModal} className="action-button delete">
+                                            <button id={item.id} onClick={ e => { props.openEditModal(e.target.id) } } className="action-button delete">
                                                 <i className="ion ion-trash-b"/>
                                             </button>
-                                            <button onClick={props.openDeleteModal} className="action-button edit">
+                                            <button id={item.id} onClick={ e => { props.openDeleteModal(e.target.id) } } className="action-button edit">
                                                 <i className="ion ion-android-create"/>
                                             </button>                                            
                                         </td>

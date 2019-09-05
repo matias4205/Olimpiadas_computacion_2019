@@ -10,6 +10,7 @@ class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            test: '1',
             deleteModalIsOpened: false,
             editModalIsOpened: false,
             data: [
@@ -218,27 +219,29 @@ class Section extends Component {
         // }
     }
 
-    toggleEditModal = e => {
+    toggleEditModal = id => {
         if(this.state.editModalIsOpened){
             this.setState({
+                test: id,
                 editModalIsOpened: false
             })
         } else {
             this.setState({
+                test: id,
                 editModalIsOpened: true
             })
         }
     }
 
-    toggleDeleteModal = e => {
+    toggleDeleteModal = id => {
         if(this.state.deleteModalIsOpened){
             this.setState({
-                test: e,
+                test: id,
                 deleteModalIsOpened: false
             })
         } else {
             this.setState({
-                test: e,
+                test: id,
                 deleteModalIsOpened: true
             })
         }
@@ -253,7 +256,8 @@ class Section extends Component {
                         {this.state.data.map(index => {
                             return (
                                 <SectionLayout
-                                    stateId={index.id}
+                                    key={index.id}
+                                    id={index.id}
                                     units={index.units}
                                     openEditModal={this.toggleEditModal}
                                     openDeleteModal={this.toggleDeleteModal}
@@ -272,7 +276,7 @@ class Section extends Component {
                             onClose={this.toggleDeleteModal}
                             title={`Edit unit ${this.props.test} description`}
                         >
-                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            <textarea className="form-control" rows="3" placeholder="Enter ..."></textarea>
                         </Modal>
                     </div>
                 </section>

@@ -191,6 +191,9 @@ class SignUp extends Component {
                     });
                 }
             break;
+
+            default:
+                break;
         }
 
         return errors;
