@@ -251,6 +251,20 @@ class Section extends Component {
         }
     }
 
+    handleEditDescription = description => {
+        this.setState({
+            data: [
+                ...data,
+                //HACER UNA FUNCION PARA EL SUBMIT
+                //HACER UN HOOK PARA EL MODAL QUE GUARDE EL ONCHANGE
+                //QUE EL HOOK LE HAGA LA PETICION A LA BASE DE DATOS Y SI ES EXITOSA (HAY CONEXION) AHI SI MODIFIQUE EL SMART PADRE
+                //
+            ]
+            
+            [data[this.state.modalIndex].units[this.state.modalUnitID - 1].description]: description
+        });
+    }
+
     render() {
         return (
             <React.Fragment>
