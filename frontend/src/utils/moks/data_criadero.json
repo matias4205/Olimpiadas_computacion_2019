@@ -2,21 +2,35 @@
     {
         "date": "12/05/2019",
         "time": "20:00",
-        "state": "active",
         "data": {
-            "water": 20,
-            "light": 12,
-            "temperature": 18
+            "water": {
+                "status": "active",
+                "value": 20
+            },
+            "light": {
+                "status": "active",
+                "value": 18
+            },
+            "temperature": {
+                "status": "active",
+                "value": 12
+            }
         }
     },
     {
         "date": "12/05/2019",
         "time": "21:00",
-        "state": "inactive",
-        "data": {   
-            "water": 17,
-            "light": 15,
-            "temperature": 20
+        "data": {
+            "water": {
+                "status": "active",
+                "value": 17
+            },
+            "light": {
+                "status": "failure"
+            },
+            "temperature": {
+                "status": "inactive"
+            }
         }
     }
 ]

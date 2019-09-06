@@ -4,7 +4,7 @@ import SectionLayout from '../components/SectionLayout';
 import ContentHeader from '../../../components/ContentHeader';
 import Modal from '../../../components/Modal';
 
-import '../components/section_styles.css';
+import './styles/section_styles.css';
 
 class Section extends Component {
     constructor(props) {

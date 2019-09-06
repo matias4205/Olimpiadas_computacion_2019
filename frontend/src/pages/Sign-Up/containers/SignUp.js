@@ -19,17 +19,17 @@ class SignUp extends Component {
             },
             form: {
                 personal: {
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: ''
+                    firstName: 'Matias',
+                    lastName: 'Perez',
+                    email: 'matiasperezpc@hotmail.com',
+                    password: 'Puto1234',
+                    confirmPassword: 'Puto1234'
                 },
                 company: {
-                    comercialDenomination: '',
-                    ownerCompany: '',
-                    fiscalCode: '',
-                    address: ''
+                    comercialDenomination: 'Juanca',
+                    ownerCompany: 'Rlos',
+                    fiscalCode: 'sdlkfaj2451',
+                    address: 'La punta de la verga'
                 }
             }
         }
@@ -62,7 +62,7 @@ class SignUp extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        if(this.checkErrors() === false && this.emptyInputs() === false){
+        if(!this.checkErrors() && !this.emptyInputs()){
             try {
                 const { data, status } = await signUp(this.state.form);
                 this.setState({

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../components/section_styles.css';
-
 const Section = (props) => {
     return (
         <React.Fragment>
