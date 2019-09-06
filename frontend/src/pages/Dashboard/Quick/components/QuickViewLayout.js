@@ -4,7 +4,7 @@ import ContentHeader from '../../../../components/ContentHeader';
 import InfoBox from '../../../../components/InfoBox';
 import { Line } from 'react-chartjs-2';
 
-function QuickViewLayout(){
+function QuickViewLayout(props){
     const salesChartData = {
         labels  : ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
         datasets: [
@@ -86,15 +86,15 @@ function QuickViewLayout(){
             <section className="content">
                 <div className="row">
                     <div className="col-md-4 col-sm-6 col-xs-12">
-                        <InfoBox color="green" title="Ambient Light" value="80 Lumens" icon="ion ion-ios-lightbulb"/>
+                        <InfoBox color="green" title="Ambient Light" value={props.lastHourAverages['light']} unit=" Lumens" icon="ion ion-ios-lightbulb"/>
                     </div>
                     
                     <div className="col-md-4 col-sm-6 col-xs-12">
-                        <InfoBox color="orange-active" title="Ambient Temperature" value="18C°" icon="ion ion-thermometer"/>
+                        <InfoBox color="orange-active" title="Ambient Temperature" value={props.lastHourAverages['temperature']} unit="C°" icon="ion ion-thermometer"/>
                     </div>
 
                     <div className="col-md-4 col-sm-6 col-xs-12">
-                        <InfoBox color="light-blue" title="Available Water" value="80%" icon="ion ion-waterdrop"/>
+                        <InfoBox color="light-blue" title="Available Water" value={props.lastHourAverages['water']} unit="%" icon="ion ion-waterdrop"/>
                     </div>
                 </div>
 

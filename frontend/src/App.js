@@ -27,24 +27,10 @@ function App() {
           <Route exact path="/profile/:userId" component={Profile} />
           <Route exact path="/dashboard" render={() => (<Redirect to='/dashboard/quick'/>)} />
           <Route exact path="/dashboard/quick" component={QuickView} />
-          <Route>404 Not Found</Route>
+          <Route component={ () => 'Not found' } />
         </Layout>
       </Switch>
     </BrowserRouter>
-    // <BrowserRouter>
-    //   <Layout>
-    //     <Switch>
-    //       <Route exact path="/" render={() => (<Redirect to='/dashboard/quick' />)}/>
-    //       <Route exact path="/sections" component={Section} />
-    //       <Route exact path="/profile/:userId" component={Profile} />
-    //       <Route exact path="/dashboard" render={() => (<Redirect to='/dashboard/quick' />)} />
-    //       <Route exact path="/dashboard/quick" component={QuickView} />
-    //       <Route exact path="/sign-in" component={SignIn} />
-    //       <Route exact path="/sign-up" component={SignUp} />
-    //       <Route>404 Not Found</Route>
-    //     </Switch>
-    //   </Layout>
-    // </BrowserRouter>
   );
 }
 

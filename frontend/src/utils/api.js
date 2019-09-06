@@ -32,5 +32,9 @@ export const signUp = (data) => axios({
 });
 
 export const getReadings = () => axios({
-    url: `${API_URL}/api/readings`
+    url: `${API_URL}/api/readings`  
+});
+
+export const getLastReadings = () => axios({
+    url: `${API_URL}/api/readings/last`  
 });
