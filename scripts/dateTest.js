@@ -1,4 +1,4 @@
-const a = require('../utils/readingsJoinQueryBuilder');
+const a = require('../utils/lastReadingsQueryBuilder');
 const b = require('../utils/truncateDateMinutes');
 const util = require('util')
 
