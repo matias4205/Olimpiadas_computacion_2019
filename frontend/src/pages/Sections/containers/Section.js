@@ -10,7 +10,9 @@ class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            test: '1',
+            modalIndex: 0,
+            modalSectionID: '',
+            modalUnitID: 1,
             deleteModalIsOpened: false,
             editModalIsOpened: false,
             data: [
@@ -44,7 +46,7 @@ class Section extends Component {
                         },
                         {
                             id: 2,
-                            description: 'test'
+                            description: 'aaaaaaaaaaaaa'
                         },
                     ]
                 },
@@ -103,7 +105,7 @@ class Section extends Component {
                     units: [
                         {
                             id: 1,
-                            description: 'test'
+                            description: 'tesssssst'
                         },
                         {
                             id: 2,
@@ -219,32 +221,48 @@ class Section extends Component {
         // }
     }
 
-    toggleEditModal = id => {
-        if(this.state.editModalIsOpened){
+    toggleEditModal = async (sectionID, unitID, index) => {
+        if (this.state.editModalIsOpened) {
             this.setState({
-                test: id,
                 editModalIsOpened: false
             })
         } else {
-            this.setState({
-                test: id,
+            await this.setState({
+                modalIndex: index,
+                modalSectionID: sectionID,
+                modalUnitID: unitID,
                 editModalIsOpened: true
             })
         }
     }
 
-    toggleDeleteModal = id => {
-        if(this.state.deleteModalIsOpened){
+    toggleDeleteModal = async (sectionID, unitID, index) => {
+        if (this.state.deleteModalIsOpened) {
             this.setState({
-                test: id,
                 deleteModalIsOpened: false
             })
         } else {
-            this.setState({
-                test: id,
+            await this.setState({
+                modalIndex: index,
+                modalSectionID: sectionID,
+                modalUnitID: unitID,
                 deleteModalIsOpened: true
             })
         }
+    }
+
+    handleEditDescription = description => {
+        this.setState({
+            data: [
+                ...data,
+                //HACER UNA FUNCION PARA EL SUBMIT
+                //HACER UN HOOK PARA EL MODAL QUE GUARDE EL ONCHANGE
+                //QUE EL HOOK LE HAGA LA PETICION A LA BASE DE DATOS Y SI ES EXITOSA (HAY CONEXION) AHI SI MODIFIQUE EL SMART PADRE
+                //
+            ]
+            
+            // [data[this.state.modalIndex].units[this.state.modalUnitID - 1].description]: description
+        });
     }
 
     render() {
@@ -253,12 +271,13 @@ class Section extends Component {
                 <ContentHeader title="Sections Management" subtitle="Manage sections and units" />
                 <section className="content">
                     <div className="masonry">
-                        {this.state.data.map(index => {
+                        {this.state.data.map((item, index) => {
                             return (
                                 <SectionLayout
-                                    key={index.id}
-                                    id={index.id}
-                                    units={index.units}
+                                    key={item.id}
+                                    id={item.id}
+                                    section={index}
+                                    units={item.units}
                                     openEditModal={this.toggleEditModal}
                                     openDeleteModal={this.toggleDeleteModal}
                                 />
@@ -267,16 +286,16 @@ class Section extends Component {
                         <Modal
                             isOpen={this.state.editModalIsOpened}
                             onClose={this.toggleEditModal}
-                            title={`Unit ${this.props.test}`}
+                            title={`Unit ${this.state.modalSectionID}${this.state.modalUnitID}`}
                         >
                             Do you really want to delete this unit?
                         </Modal>
                         <Modal
                             isOpen={this.state.deleteModalIsOpened}
                             onClose={this.toggleDeleteModal}
-                            title={`Edit unit ${this.props.test} description`}
+                            title={`Edit unit ${this.state.modalSectionID}${this.state.modalUnitID} description`}
                         >
-                            <textarea className="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            <textarea className="form-control" rows="3" value={this.state.data[this.state.modalIndex].units[this.state.modalUnitID - 1].description}></textarea>
                         </Modal>
                     </div>
                 </section>
