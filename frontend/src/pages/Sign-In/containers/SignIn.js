@@ -8,6 +8,7 @@ class SignIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: '',
             form: {
                 email: '',
                 password: ''
@@ -26,10 +27,16 @@ class SignIn extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        try {
-            const { data, status } = await signIn(this.state.form.email, this.state.form.password);
-        } catch (error) {
-            console.log(error);
+        if(this.state.form.email && this.state.form.password){
+            try {
+                this.setState({ error: '' });
+                const { data, status } = await signIn(this.state.form.password, this.state.form.email);
+            } catch (error) {
+                this.setState({ error: 'Invalid email or password' });
+                console.log(error);
+            }        
+        } else {
+            this.setState({ error: 'Each field is required' });
         }
     }
 
@@ -38,6 +45,7 @@ class SignIn extends Component {
             <SignInLayout
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
+                onError={this.error}
                 formValues={this.state.form}
             />
         );
