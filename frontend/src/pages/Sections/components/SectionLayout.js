@@ -15,7 +15,7 @@ const Section = (props) => {
                                 <th>Description</th>
                                 <th className="text-center">Actions</th>
                             </tr>
-                            {props.units.map((item, index) => {
+                            {props.units.map(item => {
                                 return (
                                     <tr key={item.id}>
                                         <td className="id">{item.id}</td>
