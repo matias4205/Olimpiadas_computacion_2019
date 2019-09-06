@@ -16,7 +16,7 @@ const SideBar = () => {
                 <ul className="sidebar-menu" data-widget="tree">
                     <li className="header">TOOLS</li>
                     <li className="treeview">
-                        <a href="#">
+                        <Link to={'/'}>
                             <i className="fa fa-dashboard"></i> <span>Dashboard</span>
                             <span className="pull-right-container">
                                 <i className="fa fa-angle-left pull-right"></i>
@@ -24,7 +24,7 @@ const SideBar = () => {
                             {/* <span className="pull-right">
                                 <i className="fa fa-circle text-info" />
                             </span> */}
-                        </a>
+                        </Link>
                         <ul className="treeview-menu">
                             <li><Link to="/dashboard/quick"><i className="fa fa-rocket"></i>Quick view</Link></li>
                             <li><Link to="/dashboard/history"><i className="fa fa-history"></i>Historical</Link></li>

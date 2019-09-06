@@ -8,6 +8,7 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: null,
             formErrors: {
                 matchPasswords: '',
                 validEmail: '',
@@ -34,14 +35,14 @@ class SignUp extends Component {
         }
     }
 
-    handleChange = async e => {
-        if (e.target.name === 'address' || e.target.name === 'fiscalCode' || e.target.name === 'ownerCompany' || e.target.name === 'comercialDenomination') {
+    handleChange = async (e, key/* company or personal */) => {
+        if (key === 'company') {
             await this.setState({
                 form: {
                     ...this.state.form,
                     company: {
                         ...this.state.form.company,
-                        [e.target.name]: e.target.value
+                        [e.name]: e.value
                     }
                 },
             });
@@ -51,12 +52,12 @@ class SignUp extends Component {
                     ...this.state.form,
                     personal: {
                         ...this.state.form.personal,
-                        [e.target.name]: e.target.value
+                        [e.name]: e.value
                     }
                 },
             });
         }
-        this.checkErrors();
+        this.checkErrors(e.name);
     }
 
     handleSubmit = async e => {
@@ -64,98 +65,135 @@ class SignUp extends Component {
         if(this.checkErrors() === false && this.emptyInputs() === false){
             try {
                 const { data, status } = await signUp(this.state.form);
+                this.setState({
+                    loading: true,
+                });
             } catch (error) {
                 console.log(error);
             }
         }
     }
 
-    checkErrors = () => {
+    checkErrors = (key) => {
         let errors = false;
 
-        if(this.state.form.personal.confirmPassword !== this.state.form.personal.password){
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    matchPasswords: 'Passwords doesn´t match',
+        switch(key) {
+            case 'password':
+                if(this.state.form.personal.confirmPassword !== this.state.form.personal.password){
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            matchPasswords: 'Passwords doesn´t match',
+                        }
+                    });
+                    errors = true;
+                } else {
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            matchPasswords: '',
+                        }
+                    });
                 }
-            });
-            errors = true;
-        } else {
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    matchPasswords: '',
-                }
-            });
-        }
+            break;
 
-        if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.form.personal.email) === false && this.state.form.personal.email){
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    validEmail: 'Please enter a valid email address',
+            case 'confirmPassword':
+                if(this.state.form.personal.confirmPassword !== this.state.form.personal.password){
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            matchPasswords: 'Passwords doesn´t match',
+                        }
+                    });
+                    errors = true;
+                } else {
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            matchPasswords: '',
+                        }
+                    });
                 }
-            });
-            errors = true;
-        } else {
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    validEmail: '',
-                }
-            });
-        }
+            break;
 
-        if(/^ *$/.test(this.state.form.company.fiscalCode)){
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    fiscalCodeTrim: 'Please enter a valid fiscal code',
+            case 'email':
+                if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.form.personal.email) === false && this.state.form.personal.email){
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            validEmail: 'Please enter a valid email address',
+                        }
+                    });
+                    errors = true;
+                } else {
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            validEmail: '',
+                        }
+                    });
                 }
-            });
-            errors = true;
-        } else {
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    fiscalCodeTrim: '',
-                }
-            });
-        }
+            break;
 
-        if(/^[a-zA-Z ]+$/.test(this.state.form.personal.firstName) === false && this.state.form.personal.firstName){
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    firstNameRegex: 'This field can not contain numbers nor symbols',
+            case 'fiscalCode':
+                if(/^ *$/.test(this.state.form.company.fiscalCode)){
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            fiscalCodeTrim: 'Please enter a valid fiscal code',
+                        }
+                    });
+                    errors = true;
+                } else {
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            fiscalCodeTrim: '',
+                        }
+                    });
                 }
-            });
-            errors = true;
-        } else {
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    firstNameRegex: '',
-                }
-            });
-        }
+            break;
 
-        if(/^[a-zA-Z ]+$/.test(this.state.form.personal.lastName) === false && this.state.form.personal.lastName){
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    lastNameRegex: 'This field can not contain numbers nor symbols',
+            case 'firstName':
+                if(/^[a-zA-Z ]+$/.test(this.state.form.personal.firstName) === false && this.state.form.personal.firstName){
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            firstNameRegex: 'This field can not contain numbers nor symbols',
+                        }
+                    });
+                    errors = true;
+                } else {
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            firstNameRegex: '',
+                        }
+                    });
                 }
-            });
-            errors = true;
-        } else {
-            this.setState({
-                formErrors: {
-                    ...this.state.formErrors,
-                    lastNameRegex: '',
+            break;
+
+            case 'lastName':
+                if(/^[a-zA-Z ]+$/.test(this.state.form.personal.lastName) === false && this.state.form.personal.lastName){
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            lastNameRegex: 'This field can not contain numbers nor symbols',
+                        }
+                    });
+                    errors = true;
+                } else {
+                    this.setState({
+                        formErrors: {
+                            ...this.state.formErrors,
+                            lastNameRegex: '',
+                        }
+                    });
                 }
-            });
+            break;
+
+            default:
+                break;
         }
 
         return errors;
@@ -186,9 +224,10 @@ class SignUp extends Component {
             <React.Fragment>
                 <SignUpLayout
                     onChange={this.handleChange}
-                    formValues={this.state.form}
                     onSubmit={this.handleSubmit}
                     onError={this.state.formErrors}
+                    formValues={this.state.form}
+                    loading={this.state.loading}
                 />
             </React.Fragment>
         );
