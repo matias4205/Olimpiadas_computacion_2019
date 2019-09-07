@@ -4,7 +4,7 @@ const Section = (props) => {
     return (
         <React.Fragment>
             <div className="box item">
-                <h1 className="box-header no-margin">{props.id}</h1>
+                <h1 className="box-header no-margin">{props.sectionName}</h1>
                 <div className="box-body">
                     <table className="table">
                         <tbody>
@@ -13,16 +13,16 @@ const Section = (props) => {
                                 <th>Description</th>
                                 <th className="text-center">Actions</th>
                             </tr>
-                            {props.units.map(item => {
+                            {props.units.map((unit, unitIndex) => {
                                 return (
-                                    <tr key={item.id}>
-                                        <td className="id">{item.id}</td>
-                                        <td>{item.description}</td>
+                                    <tr key={unit.id}>
+                                        <td className="id">{unit.id}</td>
+                                        <td>{unit.description}</td>
                                         <td className="actions text-center">
-                                            <button onClick={() => { props.openEditModal(props.id, item.id, props.section) }} className="action-button delete">
+                                            <button onClick={() => { props.openDeleteModal(props.sectionName, props.sectionIndex, unit.id, unitIndex) }} className="action-button delete">
                                                 <i className="ion ion-trash-b" />
                                             </button>
-                                            <button onClick={() => { props.openDeleteModal(props.id, item.id, props.section) }} className="action-button edit">
+                                            <button onClick={() => { props.openEditModal(props.sectionName, props.sectionIndex, unit.id, unitIndex) }} className="action-button edit">
                                                 <i className="ion ion-android-create" />
                                             </button>
                                         </td>
