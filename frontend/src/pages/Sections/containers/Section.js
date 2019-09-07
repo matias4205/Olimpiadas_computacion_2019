@@ -287,33 +287,26 @@ class Section extends Component {
                 <ContentHeader title="Sections Management" subtitle="Manage sections and units" />
                 <section className="content">
                     <div className="masonry">
-                        {this.state.data.map((section, sectionIndex) => {
-                            return (
-                                <SectionLayout
-                                    key={section.id}
-                                    sectionName={section.id}
-                                    sectionIndex={sectionIndex}
-                                    units={section.units}
-                                    openEditModal={this.toggleEditModal}
-                                    openDeleteModal={this.toggleDeleteModal}
-                                />
-                            );
-                        })}
-                        <DeleteModal 
-                            isOpen={this.state.deleteModalIsOpened}
-                            onClose={this.toggleDeleteModal}
-                            onClick={ ()=>{} }
-                            title={`Unit ${this.state.modalSectionName}${this.state.modalUnitName}`}
-                        />
-                        <EditModal
-                            isOpen={this.state.editModalIsOpened}
-                            onClose={this.toggleEditModal}
-                            onSubmit={this.handleEditDescription}
-                            title={`Edit unit ${this.state.modalSectionName}${this.state.modalUnitName} description`}
-                            description={ this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].description }
+                        <SectionLayout
+                            data={this.state.data}
+                            openEditModal={this.toggleEditModal}
+                            openDeleteModal={this.toggleDeleteModal}
                         />
                     </div>
                 </section>
+                <DeleteModal 
+                    isOpen={this.state.deleteModalIsOpened}
+                    onClose={this.toggleDeleteModal}
+                    onClick={ ()=>{} }
+                    title={`Unit ${this.state.modalSectionName}${this.state.modalUnitName}`}
+                />
+                <EditModal
+                    isOpen={this.state.editModalIsOpened}
+                    onClose={this.toggleEditModal}
+                    onSubmit={this.handleEditDescription}
+                    title={`Edit unit ${this.state.modalSectionName}${this.state.modalUnitName} description`}
+                    description={ this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].description }
+                />
             </React.Fragment>
         );
     }

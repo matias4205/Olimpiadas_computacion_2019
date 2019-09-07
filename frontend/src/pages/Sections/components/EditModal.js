@@ -7,7 +7,7 @@ const EditModal = (props) => {
 
     return (
         <Modal isOpen={ props.isOpen } title={ props.title } onClose={ props.onClose } onClick={ () => { props.onSubmit(textAreaRef.current.value) }}>
-            <textarea className="form-control" rows="3" ref={ textAreaRef } >{props.description}</textarea>
+            <textarea className="form-control" rows="3" ref={ textAreaRef } defaultValue={props.description} />
         </Modal>
     );
 };
