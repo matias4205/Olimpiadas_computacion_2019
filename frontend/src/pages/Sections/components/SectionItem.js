@@ -17,7 +17,7 @@ const SectionItem = (props) => {
                             </tr>
                             {props.units.map((unit, unitIndex) => {
                                 return (
-                                    <UnitItem key={unit.id} unitName={unit.id} description={unit.description}>
+                                    <UnitItem key={unitIndex} unitName={unit.id} description={unit.description}>
                                         <button onClick={() => { props.openDeleteModal(props.sectionName, props.sectionIndex, unit.id, unitIndex) }} className="action-button delete">
                                             <i className="ion ion-trash-b" />
                                         </button>
