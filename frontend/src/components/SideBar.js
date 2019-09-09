@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 
 import ProfileDataSmall from '../pages/Profile/components/ProfileData_Small';
 
-import profilePhoto from '../assets/images/profile.jpg';
+// import profilePhoto from '../assets/images/profile.jpg';
 
 import profileData from '../utils/moks/data_profile.json';
+const profilePhoto = null;
 
-const SideBar = () => {
+const SideBar = (props) => {
     return (
         <aside className="main-sidebar">
             <section className="sidebar">
-                <ProfileDataSmall profilePhoto={profilePhoto} firstName={profileData.firstName} lastName={profileData.lastName} role={profileData.role} uid={profileData.uid} />
+                <ProfileDataSmall profilePhoto={profilePhoto} firstName={props.firstName} lastName={props.lastName} role={props.role} uid={props.uid} />
 
                 <ul className="sidebar-menu" data-widget="tree">
                     <li className="header">TOOLS</li>

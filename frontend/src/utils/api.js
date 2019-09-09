@@ -32,9 +32,16 @@ export const signUp = (data) => axios({
 });
 
 export const getReadings = () => axios({
-    url: `${API_URL}/api/readings`  
+    url: `${API_URL}/api/readings`,
+    method: 'get'
 });
 
 export const getLastReadings = () => axios({
-    url: `${API_URL}/api/readings/last`  
+    url: `${API_URL}/api/readings/last`,
+    method: 'get'
 });
+
+export const getMe = () => axios({
+    url: `${API_URL}/api/users/me`,
+    method: 'get'
+})
