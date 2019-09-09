@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import SectionLayout from '../components/SectionLayout';
 import ContentHeader from '../../../components/ContentHeader';
-import Modal from '../../../components/Modal';
+import EditModal from '../components/EditModal';
+import DeleteModal from '../components/DeleteModal';
 
 import './styles/section_styles.css';
 
@@ -10,9 +11,10 @@ class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalIndex: 0,
-            modalSectionID: '',
-            modalUnitID: 1,
+            modalSectionName: '',
+            modalSectionIndex: 0,
+            modalUnitName: '',
+            modalUnitIndex: 0,
             deleteModalIsOpened: false,
             editModalIsOpened: false,
             data: [
@@ -221,34 +223,88 @@ class Section extends Component {
         // }
     }
 
-    toggleEditModal = async (sectionID, unitID, index) => {
+    toggleEditModal = async (sectionName, sectionIndex, unitName, unitIndex) => { //We have to edit the state in an inmutable way
         if (this.state.editModalIsOpened) {
             this.setState({
                 editModalIsOpened: false
             })
         } else {
             await this.setState({
-                modalIndex: index,
-                modalSectionID: sectionID,
-                modalUnitID: unitID,
+                modalSectionName: sectionName,
+                modalSectionIndex: sectionIndex,
+                modalUnitName: unitName,
+                modalUnitIndex: unitIndex,
                 editModalIsOpened: true
             })
         }
     }
 
-    toggleDeleteModal = async (sectionID, unitID, index) => {
+    toggleDeleteModal = async (sectionName, sectionIndex, unitName, unitIndex) => {
         if (this.state.deleteModalIsOpened) {
             this.setState({
                 deleteModalIsOpened: false
             })
         } else {
             await this.setState({
-                modalIndex: index,
-                modalSectionID: sectionID,
-                modalUnitID: unitID,
+                modalSectionName: sectionName,
+                modalSectionIndex: sectionIndex,
+                modalUnitName: unitName,
+                modalUnitIndex: unitIndex,
                 deleteModalIsOpened: true
             })
         }
+    }
+
+    handleEditDescription = newDescription => {
+        const { modalSectionIndex, modalUnitIndex } = this.state; // Gets the Section and Unit index from the state (watch lines 226 and 242)
+
+        this.setState(prevState => {
+            const { data: prevSections } = prevState;
+            // From here
+            const prevUnit = prevSections[modalSectionIndex].units[modalUnitIndex]; // Abstracts the previous and specific unit that is going to be modified
+            const newUnit = { // Changes the specific descrption of the abstracted unit
+                ...prevUnit,
+                description: newDescription
+            }
+            let newSections = [...prevSections];
+            newSections[modalSectionIndex] = { // We have absolutely no idea about what this is for, but it does not works without it
+                ...prevSections[modalSectionIndex]
+            }
+            newSections[modalSectionIndex].units[modalUnitIndex] = newUnit; // This line creates the new array of section with the modified unit
+            // To here, is the immutable way to change a component state, search about immutability
+            return { // The callback returns here the new state and closes the modals
+                ...prevState,
+                modalSectionIndex: 0,
+                modalUnitIndex: 0,
+                data: newSections,
+                deleteModalIsOpened: false,
+                editModalIsOpened: false
+            }
+        });
+    }
+
+    handleDeleteUnit = () => {
+        const { modalSectionIndex, modalUnitIndex } = this.state; // Gets the Section and Unit index from the state (watch lines 226 and 242)
+
+        this.setState(prevState => {
+            const { data: prevSections } = prevState;
+            const prevUnits = prevSections[modalSectionIndex].units;
+            const newUnits = [...prevUnits];
+            newUnits.splice(modalUnitIndex, 1);
+            let newSections = [...prevSections];
+            newSections[modalSectionIndex] = {
+                ...prevSections[modalSectionIndex]
+            }
+            newSections[modalSectionIndex].units = newUnits; // This line creates the new array of section with the modified unit
+            return { // The callback returns here the new state and closes the modals
+                ...prevState,
+                modalSectionIndex: 0,
+                modalUnitIndex: 0,
+                data: newSections,
+                deleteModalIsOpened: false,
+                editModalIsOpened: false
+            }
+        })
     }
 
     render() {
@@ -257,34 +313,26 @@ class Section extends Component {
                 <ContentHeader title="Sections Management" subtitle="Manage sections and units" />
                 <section className="content">
                     <div className="masonry">
-                        {this.state.data.map((item, index) => {
-                            return (
-                                <SectionLayout
-                                    key={item.id}
-                                    id={item.id}
-                                    section={index}
-                                    units={item.units}
-                                    openEditModal={this.toggleEditModal}
-                                    openDeleteModal={this.toggleDeleteModal}
-                                />
-                            );
-                        })}
-                        <Modal
-                            isOpen={this.state.editModalIsOpened}
-                            onClose={this.toggleEditModal}
-                            title={`Unit ${this.state.modalSectionID}${this.state.modalUnitID}`}
-                        >
-                            Do you really want to delete this unit?
-                        </Modal>
-                        <Modal
-                            isOpen={this.state.deleteModalIsOpened}
-                            onClose={this.toggleDeleteModal}
-                            title={`Edit unit ${this.state.modalSectionID}${this.state.modalUnitID} description`}
-                        >
-                            <textarea className="form-control" rows="3" value={this.state.data[this.state.modalIndex].units[this.state.modalUnitID - 1].description}></textarea>
-                        </Modal>
+                        <SectionLayout
+                            data={this.state.data}
+                            openEditModal={this.toggleEditModal}
+                            openDeleteModal={this.toggleDeleteModal}
+                        />
                     </div>
                 </section>
+                <DeleteModal
+                    isOpen={this.state.deleteModalIsOpened}
+                    onClose={this.toggleDeleteModal}
+                    onClick={this.handleDeleteUnit}
+                    title={`Unit ${this.state.modalSectionName}${this.state.modalUnitName}`}
+                />
+                <EditModal
+                    isOpen={this.state.editModalIsOpened}
+                    onClose={this.toggleEditModal}
+                    onSubmit={this.handleEditDescription}
+                    title={`Edit unit ${this.state.modalSectionName}${this.state.modalUnitName} description`}
+                    description={this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].description}
+                />
             </React.Fragment>
         );
     }
