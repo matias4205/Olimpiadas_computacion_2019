@@ -36,5 +36,10 @@ export const getReadings = () => axios({
 });
 
 export const getLastReadings = () => axios({
-    url: `${API_URL}/api/readings/last`  
+    url: `${API_URL}/api/readings/last`
 });
+
+export const getUsers = () => axios({
+    url: `${API_URL}/api/users`,
+    method: 'get'
+})
