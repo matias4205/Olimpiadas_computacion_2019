@@ -18,7 +18,7 @@ require('../../utils/strategies/jwt');
 //To get user data
 
 //Get all users of a sertain productor
-router.get('/', passport.authenticate('jwt', { session: false }), validationHandler({ productorId: mongoIdSchema}, 'params'), async (req, res, next) => {
+router.get('/', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
     const { productorId } = req.user;
 
     try {
@@ -27,6 +27,21 @@ router.get('/', passport.authenticate('jwt', { session: false }), validationHand
         res.status(200).json({
             data: users,
             message: 'Users retrived succesfuly'
+        });
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.get('/me', passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+    const { _id } = req.user;
+
+    try {
+        const user = await userService.getUser({ userId: _id });
+
+        res.status(200).json({
+            data: user,
+            message: 'Data retrived succesfuly'
         });
     } catch (err) {
         next(err);
