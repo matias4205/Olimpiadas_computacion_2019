@@ -27,7 +27,7 @@ const Layout = (props) => {
     return (
         <React.Fragment>
             <Header />
-            <SideBar uid={state.userData._id} firstName={state.userData.firstName} lastName={state.userData.lastName} role={state.userData.role}/>
+            <SideBar uid={state.userData._id} firstName={state.userData.firstName} lastName={state.userData.lastName} profilePhoto={state.userData.profilePhoto} role={state.userData.role}/>
             <div className="content-wrapper">
                 {props.children}
             </div>
