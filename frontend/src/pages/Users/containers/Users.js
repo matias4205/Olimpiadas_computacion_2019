@@ -10,6 +10,7 @@ class Users extends Component {
     constructor(props){
         super(props);
         this.state = {
+            userIndex: undefined,
             loading: false,
             users: [
                 {
@@ -41,13 +42,185 @@ class Users extends Component {
                         email: 'santiagoalmiron@test.com',
                         password: 'test'
                     }
+                },
+                {
+                    id: 4,
+                    data: {
+                        firstName: 'Federico',
+                        lastName: 'Keller',
+                        role: 'user',
+                        email: 'fedekeller@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 5,
+                    data: {
+                        firstName: 'El',
+                        lastName: 'Jali',
+                        role: 'god',
+                        email: 'godog@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 6,
+                    data: {
+                        firstName: 'John',
+                        lastName: 'Doe',
+                        role: 'capitalism',
+                        email: 'johndoe@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 7,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 8,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 9,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 10,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 11,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 12,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 13,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 14,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 15,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 16,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 17,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 18,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 19,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
+                },
+                {
+                    id: 20,
+                    data: {
+                        firstName: 'Santiago',
+                        lastName: 'Almiron',
+                        role: 'user',
+                        email: 'santiagoalmiron@test.com',
+                        password: 'test'
+                    }
                 }
             ]
         }
     }
 
-    selectUser = () => {
-        
+    selectUser = id => {
+        this.setState({
+            userIndex: id
+        });
     }
 
     componentDidMount = async () => {
@@ -60,7 +233,6 @@ class Users extends Component {
         }
     }
 
-
     render = () => {
         return (
             <React.Fragment>
@@ -70,12 +242,12 @@ class Users extends Component {
                         <UsersTable
                             title="Accounts"
                             users={this.state.users}
+                            onClick={this.selectUser}
                         />
                     </div>
                     <div className="col-md-4">
                         <UsersBadge
-                            userData={this.state.users[0].data}
-                            onClick={() => {}}
+                            userData={this.state.users[this.state.userIndex || 0]}
                         />
                     </div>
                 </section>

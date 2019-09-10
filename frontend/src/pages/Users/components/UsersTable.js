@@ -14,9 +14,9 @@ const UsersTable = (props) => {
                                 <th>Role</th>
                                 <th>Email</th>
                             </tr>
-                            {props.users.map(item => {
+                            {props.users.map((item, index) => {
                                 return (
-                                    <tr>
+                                    <tr key={index} id={index} onClick={() => { props.onClick(index) }}>
                                         <td>{item.data.firstName}</td>
                                         <td>{item.data.lastName}</td>
                                         <td>{item.data.role}</td>
