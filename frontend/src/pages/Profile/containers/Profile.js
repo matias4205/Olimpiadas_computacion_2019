@@ -5,7 +5,7 @@ import ContentHeader from '../../../components/ContentHeader';
 import CompanyInfo from '../components/CompanyInfo';
 import UserDataAndConfig from '../components/UserDataAndConfig';
 
-import './styles/Profile.css'
+import './styles/Profile.scss'
 
 import profilePhoto from '../../../assets/images/profile.jpg';
 import profileData from '../../../utils/moks/data_profile.json';
@@ -14,21 +14,36 @@ import * as API from '../../../utils/api';
 class Profile extends Component {
     state = {
         userData: {},
-        productorData: {}
+        productorData: {},
+        updateUserDataForm: {
+            
+        }
+    }
+
+    handleUpdateUserDataForm = ({ target }) => {
+        this.setState({
+            updateUserDataForm: {
+                [target.name]: target.value
+            },
+        });
     }
 
     async componentDidMount(){
         const { data: { data: userData } } = await API.getMe();
-        const { data: { data: productorData } } = await API.getProductor();
-
         this.setState({
             userData,
+            updateUserDataForm:{
+                ...userData
+            }
+        });
+        const { data: { data: productorData } } = await API.getProductor();
+        this.setState({
             productorData
         });
     }
 
     render() {
-        const { userData, productorData } = this.state;
+        const { userData, productorData, updateUserDataForm } = this.state;
 
         return (
             <React.Fragment>
@@ -40,7 +55,7 @@ class Profile extends Component {
                             <CompanyInfo companyName={productorData.comercialDenomination} ownerCompany={productorData.ownerCompany} fiscalCode={productorData.fiscalCode} address={productorData.address} />
                         </div>
                         <div className="col-md-9">
-                            <UserDataAndConfig />
+                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} />
                         </div>
                     </div>
                 </section>
