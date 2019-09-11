@@ -24,7 +24,7 @@ const Badge = (props) => {
                     </li>
                     <li className="list-group-item">
                         <b>Role</b>
-                        <p className="pull-right">{props.userData.data.role}</p>
+                        <p className="pull-right info-role">{props.userData.data.role}</p>
                     </li>
                     <li className="list-group-item">
                         <b>Email</b>
