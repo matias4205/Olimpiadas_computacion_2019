@@ -30,7 +30,7 @@ class SignIn extends Component {
         if(this.state.form.email && this.state.form.password){
             try {
                 this.setState({ error: '' });
-                const { data, status } = await signIn(this.state.form.password, this.state.form.email);
+                const { data, status } = await signIn(this.state.form.email, this.state.form.password);
             } catch (error) {
                 this.setState({ error: 'Invalid email or password' });
                 console.log(error);
