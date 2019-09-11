@@ -1,0 +1,54 @@
+import React from 'react';
+
+const UpdateProfileForm = (props) => {
+    const { firstName, lastName, email, profilePhoto } = props;
+
+    return (
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">First Name</label>
+
+                <div class="col-sm-10">
+                    <input name="firstName" type="text" class="form-control" id="inputName" placeholder="First Name" value={firstName} />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Last Name</label>
+
+                <div class="col-sm-10">
+                    <input name="lastName" type="text" class="form-control" id="inputName" placeholder="Last Name" value={lastName} />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                <div class="col-sm-10">
+                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" value={email} />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label">Photo Url</label>
+                
+                <div class="col-sm-10">
+                    <div className={`ph-item ${ profilePhoto && 'loaded' }`}>
+                        <figure className="update-user_profilePhoto">
+                            {
+                                profilePhoto ?
+                                    <img src={profilePhoto} alt="profilePhoto"/>
+                                :   <div className="ph-picture" />
+                            }
+                        </figure>
+                    </div>
+                    <input name="profilePhoto" type="url" class="form-control" id="inputEmail" placeholder="Photo URL" value={profilePhoto} />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </form>
+    );
+};
+
+export default UpdateProfileForm;

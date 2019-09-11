@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CompanyInfo = (props) => {
-    return (
+    return props.companyName ?
         <div className="box box-warning">
             <div className="box-header with-border">
                 <h3 className="box-title">Company Info</h3>
@@ -27,7 +27,18 @@ const CompanyInfo = (props) => {
                 </ul>
             </div>
         </div>
-    );
-};
+    :   <div className="box box-warning">
+            <div className="box-header with-border">
+                <h3 className="box-title">Company Info</h3>
+            </div>
+            <div className="ph-item">
+                <div className="box-body">
+                    <div className="ph-col-4">
+                        <div className="ph-picture"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
 
 export default CompanyInfo;

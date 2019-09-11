@@ -17,7 +17,6 @@ require('../../utils/strategies/basic'); //The basic method is retrived and exec
 
 //Sing-in endpoint
 router.post('/sign-in', (req, res, next) => {
-    debugger
     passport.authenticate('basic', (err, user) => { //Executing the basic auth, the Callback is called after the user is retrived and only if a user was found with 0 errors
         if(err || !user){
             return next(boom.unauthorized()); //If there is no user, triggers an unauthorized error
