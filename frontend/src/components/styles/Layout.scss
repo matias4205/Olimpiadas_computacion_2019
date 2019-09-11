@@ -5,6 +5,11 @@ $ph-gutter: 15px;
 
 @import '../../../node_modules/placeholder-loading/src/scss/placeholder-loading.scss';
 
+
+.info-role{
+    text-transform: capitalize;
+}
+
 .ph-item.profile-item{
     margin: 0px;
     border: none;

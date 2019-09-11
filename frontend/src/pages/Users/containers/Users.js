@@ -238,17 +238,19 @@ class Users extends Component {
             <React.Fragment>
                 <ContentHeader title="Users Management" subtitle="Manage user accounts" />
                 <section className="content">
-                    <div className="col-md-8">
-                        <UsersTable
-                            title="Accounts"
-                            users={this.state.users}
-                            onClick={this.selectUser}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <UsersBadge
-                            userData={this.state.users[this.state.userIndex || 0]}
-                        />
+                    <div className="row">
+                        <div className="col-md-8">
+                            <UsersTable
+                                title="Accounts"
+                                users={this.state.users}
+                                onClick={this.selectUser}
+                            />
+                        </div>
+                        <div className="col-md-4">
+                            <UsersBadge
+                                userData={this.state.users[this.state.userIndex || 0]}
+                            />
+                        </div>
                     </div>
                 </section>
             </React.Fragment>

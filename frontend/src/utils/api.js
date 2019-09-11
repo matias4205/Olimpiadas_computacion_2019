@@ -50,3 +50,8 @@ export const getUsers = () => axios({
     url: `${API_URL}/api/users`,
     method: 'get'
 });
+
+export const getProductor = () => axios({
+    url: `${API_URL}/api/productor`,
+    method: 'get'
+})

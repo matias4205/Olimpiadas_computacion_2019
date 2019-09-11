@@ -56,7 +56,6 @@ class QuickView extends Component {
 
     render() {
         return (
-
             <QuickViewLayout lastHourAverages={this.state.lastHourAverages} />
         );
     }

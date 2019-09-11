@@ -11,7 +11,7 @@ const ProfileData_Small = (props) => {
           </Link>
           <div className="pull-left info">
               <p><Link to={`/profile/${props.uid}`} style={{ color: '#fff' }}>{`${props.firstName} ${props.lastName}`}</Link></p>
-              <h6><i className="fa fa-circle text-success" style={{ marginRight: 4}}></i>{props.role}</h6>
+              <h6 className="info-role"><i className="fa fa-circle text-success" style={{ marginRight: 4}}></i>{props.role}</h6>
           </div>
       </div>
     :

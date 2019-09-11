@@ -3,21 +3,45 @@ import React, { Component } from 'react';
 import ProfileDataBig from '../components/ProfileData_Big';
 import ContentHeader from '../../../components/ContentHeader';
 import CompanyInfo from '../components/CompanyInfo';
+import UserDataAndConfig from '../components/UserDataAndConfig';
 
 import './styles/Profile.css'
 
 import profilePhoto from '../../../assets/images/profile.jpg';
 import profileData from '../../../utils/moks/data_profile.json';
+import * as API from '../../../utils/api';
 
 class Profile extends Component {
+    state = {
+        userData: {},
+        productorData: {}
+    }
+
+    async componentDidMount(){
+        const { data: { data: userData } } = await API.getMe();
+        const { data: { data: productorData } } = await API.getProductor();
+
+        this.setState({
+            userData,
+            productorData
+        });
+    }
+
     render() {
+        const { userData, productorData } = this.state;
+
         return (
             <React.Fragment>
                 <ContentHeader title="Profile" subtitle="Profile data" />
                 <section className="content">
-                    <div className="container-fluid">
-                        <ProfileDataBig profilePhoto={profilePhoto} firstName={profileData.firstName} lastName={profileData.lastName} role={profileData.role} uid={profileData.uid} />
-                        <CompanyInfo companyName="Avicorp" comercialDenomination="Avicorp Inc" fiscalCode="skd9k1kdla83" address="Calabozo 2421" />
+                    <div className="row">
+                        <div className="col-md-3">
+                            <ProfileDataBig profilePhoto={userData.profilePhoto} firstName={userData.firstName} lastName={userData.lastName} role={userData.role} uid={userData._id} email={userData.email} />
+                            <CompanyInfo companyName={productorData.comercialDenomination} ownerCompany={productorData.ownerCompany} fiscalCode={productorData.fiscalCode} address={productorData.address} />
+                        </div>
+                        <div className="col-md-9">
+                            <UserDataAndConfig />
+                        </div>
                     </div>
                 </section>
             </React.Fragment>
