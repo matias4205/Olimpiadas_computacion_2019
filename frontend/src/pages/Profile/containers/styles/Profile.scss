@@ -29,9 +29,8 @@
             }
         }
     }
-
-    .ph-item.loaded::before{
-        display: none;
-    }
 }
 
+.ph-item.loaded::before{
+    display: none;
+}
