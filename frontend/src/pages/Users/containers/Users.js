@@ -227,7 +227,10 @@ class Users extends Component {
         try {
             this.setState({ loading: true });
             const { data } = await getUsers();
-            this.setState({ loading: false });
+            this.setState({ 
+                loading: false,
+                users: data
+            });
         } catch (error) {
             console.log(error);
         }

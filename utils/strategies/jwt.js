@@ -12,7 +12,7 @@ var cookieExtractor = function(req) {
         token = req.cookies['token'];
     }
     //TODO RECORDAR BORRAR ESTO!!
-    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGlhc3BlcmV6cGNAaG90bWFpbC5jb20iLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTU2ODI5MjUyNiwiZXhwIjoxNTY4MjkzNDI2fQ.f_cdZq8rpDoRNkLxD9jzCiqONfwSDUyLA3CIHhpV9aI';
+    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbnRpYm9zdGVybzIwMDFAZ21haWwuY29tIiwicm9sZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE1NjgzMDA0NzIsImV4cCI6MTU2ODMwMTM3Mn0.yUEURaywHH5pqCvV2jxOL0WD96JXigqy8vEBvZz3b3Q';
 
     return token;
 };
