@@ -29,58 +29,62 @@ const UsersTable = (props) => {
                 </table>
             </div>
         </div>
-    :
-    <div className="box item">
-        <h1 className="box-header no-margin">{props.title}</h1>
-        <div className="box-body table-responsive">
-            <table className="table table-hover">
-                <tbody>
-                    <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Role</th>
-                        <th>Email</th>
-                    </tr>
-                    <td>
-                        <div style={{"border": 0}} className="ph-item">
-                            <div style={{"padding": 0}} className="ph-col-3">
-                                <div className="ph-row data">
-                                    <div className="ph-col-12 profile-item_data-item"></div>
+        :
+        <div className="box item">
+            <h1 className="box-header no-margin">{props.title}</h1>
+            <div className="box-body table-responsive">
+                <table className="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Role</th>
+                            <th>Email</th>
+                        </tr>
+                        <td>
+                            <div style={{ "border": 0 }} className="ph-item">
+                                <div className="ph-col-3">
+                                    <div className="ph-row data">
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                    </div>
                                 </div>
-                            </div>            
-                        </div>
-                    </td>
-                    <td>
-                        <div style={{"border": 0}} className="ph-item">
-                            <div style={{"padding": 0}} className="ph-col-3">
-                                <div className="ph-row data">
-                                    <div className="ph-col-12 profile-item_data-item"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style={{ "border": 0 }} className="ph-item">
+                                <div className="ph-col-3">
+                                    <div className="ph-row data">
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                    </div>
                                 </div>
-                            </div>            
-                        </div>
-                    </td>
-                    <td>
-                        <div style={{"border": 0}} className="ph-item">
-                            <div style={{"padding": 0}} className="ph-col-3">
-                                <div className="ph-row data">
-                                    <div className="ph-col-12 profile-item_data-item"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style={{ "border": 0 }} className="ph-item">
+                                <div className="ph-col-3">
+                                    <div className="ph-row data">
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                    </div>
                                 </div>
-                            </div>            
-                        </div>
-                    </td>
-                    <td>
-                        <div style={{"border": 0}} className="ph-item">
-                            <div style={{"padding": 0}} className="ph-col-3">
-                                <div className="ph-row data">
-                                    <div className="ph-col-12 profile-item_data-item"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style={{ "border": 0 }} className="ph-item">
+                                <div className="ph-col-3">
+                                    <div className="ph-row data">
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                        <div style={{ "margin": 0 }} className="ph-col-12"></div>
+                                    </div>
                                 </div>
-                            </div>            
-                        </div>
-                    </td>
-                </tbody>
-            </table>
+                            </div>
+                        </td>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 };
 
 export default UsersTable;

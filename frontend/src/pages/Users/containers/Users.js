@@ -11,14 +11,14 @@ class Users extends Component {
         super(props);
         this.state = {
             userIndex: undefined,
-            loading: false,
+            loading: true,
             users: [
                 {
-                    id: 1,
-                    firstName: 'Santiago',
-                    lastName: 'Moran',
-                    role: 'administrator',
-                    email: 'santimoran@test.com'
+                    id: undefined,
+                    firstName: '',
+                    lastName: '',
+                    role: '',
+                    email: ''
                 }
             ]
         }
@@ -32,7 +32,6 @@ class Users extends Component {
 
     componentDidMount = async () => {
         try {
-            this.setState({ loading: true });
             var { data } = await getUsers();
             this.setState({ 
                 loading: false,
@@ -59,6 +58,7 @@ class Users extends Component {
                         </div>
                         <div className="col-md-4">
                             <UsersBadge
+                                loading={this.state.loading}
                                 userData={this.state.users[this.state.userIndex || 0]}
                             />
                         </div>
