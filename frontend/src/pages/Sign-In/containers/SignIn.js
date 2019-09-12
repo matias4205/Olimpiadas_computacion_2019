@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import SignInLayout from '../components/SignInLayout';
 
@@ -12,7 +13,8 @@ class SignIn extends Component {
             form: {
                 email: '',
                 password: ''
-            }
+            },
+            logged: false
         };
     }
 
@@ -31,6 +33,15 @@ class SignIn extends Component {
             try {
                 this.setState({ error: '' });
                 const { data, status } = await signIn(this.state.form.email, this.state.form.password);
+                if(status === 200){
+                    this.setState({
+                        logged: true
+                    })
+                }else{
+                    this.setState({
+                        error: 'Email or password invalid'
+                    });
+                }
             } catch (error) {
                 this.setState({ error: 'Invalid email or password' });
                 console.log(error);
@@ -41,14 +52,14 @@ class SignIn extends Component {
     }
 
     render() {
-        return (
-            <SignInLayout
+        return this.state.logged ?
+            <Redirect to="/" />
+        :   <SignInLayout
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
                 onError={this.error}
                 formValues={this.state.form}
             />
-        );
     }
 }
 

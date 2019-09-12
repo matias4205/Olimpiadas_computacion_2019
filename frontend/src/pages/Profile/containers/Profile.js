@@ -15,21 +15,28 @@ class Profile extends Component {
     state = {
         userData: {},
         productorData: {},
-        updateUserDataForm: {
-            
-        }
+        updateUserDataForm: {}
+    }
+
+    submitUpdate = async (e) => {
+        e.preventDefault();
+        const { data, status } = await API.updateUser(this.state.updateUserDataForm);
     }
 
     handleUpdateUserDataForm = ({ target }) => {
-        this.setState({
-            updateUserDataForm: {
-                [target.name]: target.value
-            },
+        this.setState((prevState)=>{
+            return {
+                updateUserDataForm: {
+                    ...prevState.updateUserDataForm,
+                    [target.name]: target.value
+                },
+            }
         });
     }
 
     async componentDidMount(){
         const { data: { data: userData } } = await API.getMe();
+        delete userData.password;
         this.setState({
             userData,
             updateUserDataForm:{
@@ -50,12 +57,12 @@ class Profile extends Component {
                 <ContentHeader title="Profile" subtitle="Profile data" />
                 <section className="content">
                     <div className="row">
-                        <div className="col-md-3">
-                            <ProfileDataBig profilePhoto={userData.profilePhoto} firstName={userData.firstName} lastName={userData.lastName} role={userData.role} uid={userData._id} email={userData.email} />
-                            <CompanyInfo companyName={productorData.comercialDenomination} ownerCompany={productorData.ownerCompany} fiscalCode={productorData.fiscalCode} address={productorData.address} />
+                        <div className="col-md-4">
+                            <ProfileDataBig userData={userData} />
+                            <CompanyInfo productorData={productorData} />
                         </div>
-                        <div className="col-md-9">
-                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} />
+                        <div className="col-md-8">
+                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} onChange={this.handleUpdateUserDataForm} onSubmit={this.submitUpdate} />
                         </div>
                     </div>
                 </section>

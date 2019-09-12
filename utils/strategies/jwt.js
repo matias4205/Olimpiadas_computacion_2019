@@ -11,7 +11,7 @@ var cookieExtractor = function(req) {
     {
         token = req.cookies['token'];
     }
-    //TODO RECORDAR BORRAR ESTO!!
+    
     return token;
 };
 
