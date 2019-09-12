@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import SignInLayout from '../components/SignInLayout';
 
@@ -8,10 +9,12 @@ class SignIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error: '',
             form: {
                 email: '',
                 password: ''
-            }
+            },
+            logged: false
         };
     }
 
@@ -26,21 +29,37 @@ class SignIn extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        try {
-            const { data, status } = await signIn(this.state.form.password, this.state.form.email);
-        } catch (error) {
-            console.log(error);
+        if(this.state.form.email && this.state.form.password){
+            try {
+                this.setState({ error: '' });
+                const { data, status } = await signIn(this.state.form.email, this.state.form.password);
+                if(status === 200){
+                    this.setState({
+                        logged: true
+                    })
+                }else{
+                    this.setState({
+                        error: 'Email or password invalid'
+                    });
+                }
+            } catch (error) {
+                this.setState({ error: 'Invalid email or password' });
+                console.log(error);
+            }        
+        } else {
+            this.setState({ error: 'Each field is required' });
         }
     }
 
     render() {
-        return (
-            <SignInLayout
+        return this.state.logged ?
+            <Redirect to="/" />
+        :   <SignInLayout
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
+                onError={this.error}
                 formValues={this.state.form}
             />
-        );
     }
 }
 

@@ -12,6 +12,7 @@ import QuickView from './pages/Dashboard/Quick/containers/QuickView'
 import Section from './pages/Sections/containers/Section';
 import SignIn from './pages/Sign-In/containers/SignIn'
 import SignUp from './pages/Sign-Up/containers/SignUp'
+import Users from './pages/Users/containers/Users';
 
 import './assets/styles/general.css';
 
@@ -27,24 +28,11 @@ function App() {
           <Route exact path="/profile/:userId" component={Profile} />
           <Route exact path="/dashboard" render={() => (<Redirect to='/dashboard/quick'/>)} />
           <Route exact path="/dashboard/quick" component={QuickView} />
-          <Route>404 Not Found</Route>
+          <Route exact path="/users" component={Users} />
+          <Route component={ () => 'Not found' } />
         </Layout>
       </Switch>
     </BrowserRouter>
-    // <BrowserRouter>
-    //   <Layout>
-    //     <Switch>
-    //       <Route exact path="/" render={() => (<Redirect to='/dashboard/quick' />)}/>
-    //       <Route exact path="/sections" component={Section} />
-    //       <Route exact path="/profile/:userId" component={Profile} />
-    //       <Route exact path="/dashboard" render={() => (<Redirect to='/dashboard/quick' />)} />
-    //       <Route exact path="/dashboard/quick" component={QuickView} />
-    //       <Route exact path="/sign-in" component={SignIn} />
-    //       <Route exact path="/sign-up" component={SignUp} />
-    //       <Route>404 Not Found</Route>
-    //     </Switch>
-    //   </Layout>
-    // </BrowserRouter>
   );
 }
 

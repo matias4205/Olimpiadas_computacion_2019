@@ -7,7 +7,10 @@ const InfoBox = (props) => {
 
             <div className="info-box-content">
                 <span className="info-box-text">{props.title}</span>
-                <span className="info-box-number">{props.value}</span>
+                { props.value !== undefined ? //Initially it is undefined, but if no readings had been averaged it is null so returns true
+                    <span className="info-box-number">{ props.value ? props.value + props.unit : 'No readings'}</span> :
+                    <div className="loader" />
+                }
                 <i className="fa fa-info-circle text-muted info-hoverable" style={{ position: 'absolute' }}></i>
             </div>
 

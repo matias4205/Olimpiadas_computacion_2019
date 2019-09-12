@@ -18,22 +18,23 @@ require('../../utils/strategies/basic'); //The basic method is retrived and exec
 //Sing-in endpoint
 router.post('/sign-in', (req, res, next) => {
     passport.authenticate('basic', (err, user) => { //Executing the basic auth, the Callback is called after the user is retrived and only if a user was found with 0 errors
-        if (err || !user){
-            next(boom.unauthorized()); //If there is no user, triggers an unauthorized error
+        if(err || !user){
+            return next(boom.unauthorized()); //If there is no user, triggers an unauthorized error
         }
-
+        
         req.logIn(user, { session: false }, (error) => { //Inicia sesion con el usuario dado, si hay error lo reporta sin el boom
             if (error) {
-                next(error); //If an error occurs the express error handler is called
+                return next(error); //If an error occurs the express error handler is called
             }
             
             const payload = { email: user.email, role: user.role }; // Si no hay error el payload se crea con el user recien creado recibido en el callback
             const token = jwt.sign(payload, adminConfig.authJwtSecret, { //Signing the JWT with the payload
-                expiresIn: '15m' //This means that this token expires in 15 minutes
+                expiresIn: srvConfig.dev ? '59m' : '15m' //This means that this token expires in 15 minutes
             });
-
+            
             res.cookie('token', token, { //A cookie with the token for the client gets created
                 httpOnly: !srvConfig.dev,
+                sameSite: !srvConfig.dev
             })
 
             return res.status(200).json({ token, user }); //We answer the client with a succesfull status, with the token, and his user data

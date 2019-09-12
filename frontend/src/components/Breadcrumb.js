@@ -48,9 +48,9 @@ const routes = [
 const Breadcrumb = () => {
     return (
         <ol className="breadcrumb">
-            {routes.map((route)=>{
+            {routes.map((route, index)=>{
                 return(
-                    <Route path={route.path} render={()=> <BreadcrumbItem path={route.path} icon={route.icon} name={route.name} /> } />
+                    <Route key={index} path={route.path} render={()=> <BreadcrumbItem path={route.path} icon={route.icon} name={route.name} /> } />
                 )
             })}
         </ol>

@@ -1,3 +1,5 @@
+const dateMinuteTruncator = require('./truncateDateMinutes');
+
 module.exports = (productorId) => [
     {
         $match: {
@@ -15,14 +17,17 @@ module.exports = (productorId) => [
             let: { section_productorId: "$productorId", section_unitName: "$units.unitName" },
             pipeline: [
               { $match:
-                 { $expr:
+                { $expr:
                     { $and:
-                       [
-                         { $eq: [ "$productorId",  "$$section_productorId" ] },
-                         { $eq: [ "$unitName", "$$section_unitName" ] }
-                       ]
+                        [
+                            { $eq: [ "$productorId",  "$$section_productorId" ] },
+                            { $eq: [ "$unitName", "$$section_unitName" ] }
+                        ]
+                    },
+                    date: {
+                        $gte: dateMinuteTruncator(new Date()),
                     }
-                 }
+                }
               }
             ],
             as: 'units.readings'

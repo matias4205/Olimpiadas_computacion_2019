@@ -14,9 +14,9 @@ const { srvConfig } = require('./config');
 
 const app = express();
 
-app.use(cors())
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 // app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'frontend/build')));

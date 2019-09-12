@@ -3,20 +3,16 @@ import { Link } from 'react-router-dom';
 
 import ProfileDataSmall from '../pages/Profile/components/ProfileData_Small';
 
-import profilePhoto from '../assets/images/profile.jpg';
-
-import profileData from '../utils/moks/data_profile.json';
-
-const SideBar = () => {
+const SideBar = (props) => {
     return (
         <aside className="main-sidebar">
             <section className="sidebar">
-                <ProfileDataSmall profilePhoto={profilePhoto} firstName={profileData.firstName} lastName={profileData.lastName} role={profileData.role} uid={profileData.uid} />
+                <ProfileDataSmall profilePhoto={props.profilePhoto} firstName={props.firstName} lastName={props.lastName} role={props.role} uid={props.uid} />
 
                 <ul className="sidebar-menu" data-widget="tree">
                     <li className="header">TOOLS</li>
                     <li className="treeview">
-                        <a href="#">
+                        <Link to={'/'}>
                             <i className="fa fa-dashboard"></i> <span>Dashboard</span>
                             <span className="pull-right-container">
                                 <i className="fa fa-angle-left pull-right"></i>
@@ -24,7 +20,7 @@ const SideBar = () => {
                             {/* <span className="pull-right">
                                 <i className="fa fa-circle text-info" />
                             </span> */}
-                        </a>
+                        </Link>
                         <ul className="treeview-menu">
                             <li><Link to="/dashboard/quick"><i className="fa fa-rocket"></i>Quick view</Link></li>
                             <li><Link to="/dashboard/history"><i className="fa fa-history"></i>Historical</Link></li>

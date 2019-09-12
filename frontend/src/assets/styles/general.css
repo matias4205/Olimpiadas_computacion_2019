@@ -34,3 +34,30 @@
 .full-height-container{
     height: 100vh !important;
 }
+
+.loader{
+    display: inline-block;
+	width: 1.5em;
+    height: 1.5em;
+    margin-top: 8px;
+	color: inherit;
+	vertical-align: middle;
+	pointer-events: none;
+	background-color: currentcolor;
+	border-radius: 50%;
+    animation: loader 1.0s infinite ease-in-out;
+}
+
+.paddless{
+    padding: 0px !important;
+}
+
+@keyframes loader {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1.0);
+		opacity: 0;
+	}
+}

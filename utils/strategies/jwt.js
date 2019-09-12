@@ -11,6 +11,7 @@ var cookieExtractor = function(req) {
     {
         token = req.cookies['token'];
     }
+    
     return token;
 };
 
