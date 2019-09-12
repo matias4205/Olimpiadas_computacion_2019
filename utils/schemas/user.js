@@ -18,7 +18,8 @@ const updateUserSchema = joi.object({
     lastName: joi.string().max(15).min(2),
     role: joi.string().valid('administrator', 'operator'),
     scopes: joi.array().min(1).items(joi.string().regex(/^([a-z]+):([a-z]+)$/)),
-    email: userEmailSchema
+    email: userEmailSchema,
+    profilePhoto: joi.string().regex(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/m)
 });
 
 module.exports = {
