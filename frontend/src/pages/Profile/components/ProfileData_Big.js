@@ -30,7 +30,8 @@ const ProfileData_Big = (props) => {
                 </ul>
             </div>
         </div>
-    :   <div className="box box-success">
+    :   
+        <div className="box box-success">
             <div className="ph-item">
                 <div className="box-body box-profile">
                     <div className="ph-col-2" style={{ marginBottom: 20 }} >

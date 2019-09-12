@@ -15,14 +15,14 @@ const ProfileData_Small = (props) => {
           </div>
       </div>
     :
-      <div class="ph-item profile-item">
-          <div class="ph-col-2">
-            <div class="ph-avatar"></div>
+      <div className="ph-item profile-item">
+          <div className="ph-col-2">
+            <div className="ph-avatar"></div>
           </div>
-          <div class="ph-col-9">
-            <div class="ph-row profile-item_data">
-              <div class="ph-col-12 profile-item_data-item"></div>
-              <div class="ph-col-10 profile-item_data-item"></div>
+          <div className="ph-col-9">
+            <div className="ph-row profile-item_data">
+              <div className="ph-col-12 profile-item_data-item"></div>
+              <div className="ph-col-10 profile-item_data-item"></div>
             </div>
           </div>
       </div>
