@@ -21,10 +21,13 @@ class Profile extends Component {
     }
 
     handleUpdateUserDataForm = ({ target }) => {
-        this.setState({
-            updateUserDataForm: {
-                [target.name]: target.value
-            },
+        this.setState((prevState)=>{
+            return {
+                updateUserDataForm: {
+                    ...prevState.updateUserDataForm,
+                    [target.name]: target.value
+                },
+            }
         });
     }
 
@@ -55,7 +58,7 @@ class Profile extends Component {
                             <CompanyInfo companyName={productorData.comercialDenomination} ownerCompany={productorData.ownerCompany} fiscalCode={productorData.fiscalCode} address={productorData.address} />
                         </div>
                         <div className="col-md-9">
-                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} />
+                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} onChange={this.handleUpdateUserDataForm} />
                         </div>
                     </div>
                 </section>

@@ -12,6 +12,8 @@ var cookieExtractor = function(req) {
         token = req.cookies['token'];
     }
     //TODO RECORDAR BORRAR ESTO!!
+    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGlhc3BlcmV6cGNAaG90bWFpbC5jb20iLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTU2ODI4ODU2NSwiZXhwIjoxNTY4Mjg5NDY1fQ.4tEEGd_wiyGWvgd2Y9xXDNv9eLThj5_iX3kcqrDjnds';
+
     return token;
 };
 

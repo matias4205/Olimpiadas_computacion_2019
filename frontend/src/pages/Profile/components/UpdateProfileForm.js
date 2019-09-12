@@ -9,21 +9,21 @@ const UpdateProfileForm = (props) => {
                 <label for="inputName" class="col-sm-2 control-label">First Name</label>
 
                 <div class="col-sm-10">
-                    <input name="firstName" type="text" class="form-control" id="inputName" placeholder="First Name" value={firstName} />
+                    <input name="firstName" type="text" class="form-control" id="inputName" placeholder="First Name" onChange={props.onChange} value={firstName} />
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputName" class="col-sm-2 control-label">Last Name</label>
 
                 <div class="col-sm-10">
-                    <input name="lastName" type="text" class="form-control" id="inputName" placeholder="Last Name" value={lastName} />
+                    <input name="lastName" type="text" class="form-control" id="inputName" placeholder="Last Name" onChange={props.onChange} value={lastName} />
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                 <div class="col-sm-10">
-                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" value={email} />
+                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" onChange={props.onChange} value={email} />
                 </div>
             </div>
             <div class="form-group">
@@ -39,7 +39,7 @@ const UpdateProfileForm = (props) => {
                             }
                         </figure>
                     </div>
-                    <input name="profilePhoto" type="url" class="form-control" id="inputEmail" placeholder="Photo URL" value={profilePhoto} />
+                    <input name="profilePhoto" type="url" class="form-control" id="inputEmail" placeholder="Photo URL" onChange={props.onChange} value={profilePhoto} />
                 </div>
             </div>
             <div class="form-group">
