@@ -29,7 +29,7 @@ router.post('/sign-in', (req, res, next) => {
             
             const payload = { email: user.email, role: user.role }; // Si no hay error el payload se crea con el user recien creado recibido en el callback
             const token = jwt.sign(payload, adminConfig.authJwtSecret, { //Signing the JWT with the payload
-                expiresIn: '15m' //This means that this token expires in 15 minutes
+                expiresIn: srvConfig.dev ? '59m' : '15m' //This means that this token expires in 15 minutes
             });
             
             res.cookie('token', token, { //A cookie with the token for the client gets created
