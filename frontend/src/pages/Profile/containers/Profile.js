@@ -20,6 +20,11 @@ class Profile extends Component {
         }
     }
 
+    submitUpdate = async (e) => {
+        e.preventDefault();
+        const { data, status } = await API.updateUser(this.state.updateUserDataForm);
+    }
+
     handleUpdateUserDataForm = ({ target }) => {
         this.setState((prevState)=>{
             return {
@@ -33,6 +38,7 @@ class Profile extends Component {
 
     async componentDidMount(){
         const { data: { data: userData } } = await API.getMe();
+        delete userData.password;
         this.setState({
             userData,
             updateUserDataForm:{
@@ -58,7 +64,7 @@ class Profile extends Component {
                             <CompanyInfo companyName={productorData.comercialDenomination} ownerCompany={productorData.ownerCompany} fiscalCode={productorData.fiscalCode} address={productorData.address} />
                         </div>
                         <div className="col-md-9">
-                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} onChange={this.handleUpdateUserDataForm} />
+                            <UserDataAndConfig updateUserDataForm={updateUserDataForm} onChange={this.handleUpdateUserDataForm} onSubmit={this.submitUpdate} />
                         </div>
                     </div>
                 </section>

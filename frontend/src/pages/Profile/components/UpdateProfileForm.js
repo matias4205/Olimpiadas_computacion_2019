@@ -4,7 +4,7 @@ const UpdateProfileForm = (props) => {
     const { firstName, lastName, email, profilePhoto } = props;
 
     return (
-        <form class="form-horizontal">
+        <form class="form-horizontal" onSubmit={props.onSubmit} >
             <div class="form-group">
                 <label for="inputName" class="col-sm-2 control-label">First Name</label>
 
