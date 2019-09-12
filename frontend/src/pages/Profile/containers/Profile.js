@@ -15,9 +15,7 @@ class Profile extends Component {
     state = {
         userData: {},
         productorData: {},
-        updateUserDataForm: {
-            
-        }
+        updateUserDataForm: {}
     }
 
     submitUpdate = async (e) => {
@@ -59,11 +57,11 @@ class Profile extends Component {
                 <ContentHeader title="Profile" subtitle="Profile data" />
                 <section className="content">
                     <div className="row">
-                        <div className="col-md-3">
-                            <ProfileDataBig profilePhoto={userData.profilePhoto} firstName={userData.firstName} lastName={userData.lastName} role={userData.role} uid={userData._id} email={userData.email} />
-                            <CompanyInfo companyName={productorData.comercialDenomination} ownerCompany={productorData.ownerCompany} fiscalCode={productorData.fiscalCode} address={productorData.address} />
+                        <div className="col-md-4">
+                            <ProfileDataBig userData={userData} />
+                            <CompanyInfo productorData={productorData} />
                         </div>
-                        <div className="col-md-9">
+                        <div className="col-md-8">
                             <UserDataAndConfig updateUserDataForm={updateUserDataForm} onChange={this.handleUpdateUserDataForm} onSubmit={this.submitUpdate} />
                         </div>
                     </div>
