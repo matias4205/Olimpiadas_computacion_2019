@@ -52,6 +52,11 @@ export const getMe = () => axios({
     method: 'get'
 });
 
+export const getUser = (uid) => axios({
+    url: `${API_URL}/api/users/${uid}`,
+    method: 'get'
+});
+
 export const getUsers = () => axios({
     url: `${API_URL}/api/users`,
     method: 'get'

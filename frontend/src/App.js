@@ -37,6 +37,7 @@ function App() {
           <Route exact path="/" render={() => (<Redirect to='/dashboard/quick'/>)}/>
           <Route exact path="/sections" component={Section}/>
           <Route exact path="/profile/:userId" component={Profile} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/dashboard" render={() => (<Redirect to='/dashboard/quick'/>)} />
           <Route exact path="/dashboard/quick" component={QuickView} />
           <Route exact path="/users" component={Users} />
