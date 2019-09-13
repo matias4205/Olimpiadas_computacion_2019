@@ -31,7 +31,7 @@ const Badge = (props) => {
                         <p className="pull-right">{props.userData.email}</p>
                     </li>
                 </ul>
-                <Link to={`/profile/${props.userData.id}`} className="btn btn-primary btn-block">
+                <Link to={`/profile/${props.userData._id}`} className="btn btn-primary btn-block">
                     <b>Go to profile</b>
                 </Link>
             </div>

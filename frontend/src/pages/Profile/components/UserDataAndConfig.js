@@ -15,7 +15,7 @@ const UserDataAndConfig = (props) => {
                     <UserActivity />
                 </div>
                 <div className="tab-pane" id="settings">
-                    <UpdateProfileForm {...props.updateUserDataForm} onChange={props.onChange} onSubmit={props.onSubmit} />
+                    <UpdateProfileForm updateUserDataForm={props.updateUserDataForm} onChange={props.onChange} onSubmit={props.onSubmit} />
                 </div>
             </div>
         </div>

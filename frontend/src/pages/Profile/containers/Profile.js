@@ -7,8 +7,6 @@ import UserDataAndConfig from '../components/UserDataAndConfig';
 
 import './styles/Profile.scss'
 
-import profilePhoto from '../../../assets/images/profile.jpg';
-import profileData from '../../../utils/moks/data_profile.json';
 import * as API from '../../../utils/api';
 
 class Profile extends Component {
@@ -20,7 +18,19 @@ class Profile extends Component {
 
     submitUpdate = async (e) => {
         e.preventDefault();
+        this.setState({
+            productorData: {},
+            updateUserDataForm: {
+                firstName: "",
+                lastName: "",
+                role: "",
+                profilePhoto: "",
+                email: ""
+            },
+            userData: {}
+        });
         const { data, status } = await API.updateUser(this.state.updateUserDataForm);
+        this.fetchProfileData();
     }
 
     handleUpdateUserDataForm = ({ target }) => {
@@ -34,8 +44,9 @@ class Profile extends Component {
         });
     }
 
-    async componentDidMount(){
-        const { data: { data: userData } } = await API.getMe();
+    async fetchProfileData(){
+        const uid = this.props.match.params.userId;
+        const { data: { data: userData } } = uid ? await API.getUser(uid) : await API.getMe();
         delete userData.password;
         this.setState({
             userData,
@@ -47,6 +58,10 @@ class Profile extends Component {
         this.setState({
             productorData
         });
+    }
+
+    async componentDidMount(){
+        this.fetchProfileData();
     }
 
     render() {
