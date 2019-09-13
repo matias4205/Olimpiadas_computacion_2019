@@ -109,6 +109,19 @@ Recordar descargar este archivo https://github.com/ColorlibHQ/AdminLTE/archive/v
     * ``` GET | /api/users/:userId ```
     * Request Body: **None**
 
+* Create a user:
+    * ``` POST | /api/users ```
+    * Request Body:
+    * ```
+        {
+            "firstName": "",
+            "lastName": "",
+            "role": "",
+            "email": "",
+            "password": ""
+        }
+        ```
+
 * Edit a user:
     * ``` PUT | /api/users/:userId ```
     * Request Body:
