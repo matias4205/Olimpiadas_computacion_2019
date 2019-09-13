@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const { ObjectId } = require('mongodb');
+const md5 = require('md5');
 
 const MongoLib = require('../lib/mongo');
 
@@ -31,7 +32,8 @@ class UserService{
     async createUser({ user }){
         const hashedPassword = await bcrypt.hash(user.password, 10);
         const scopes = user.role === 'administrator' ? administratorUserDefaultScopes : operatorUserDefaultScopes;
-        const createdUserId = await this.mongodb.create(this.collection, { ...user, password: hashedPassword, scopes });
+        const profilePhoto = `http://www.gravatar.com/avatar/${md5(user.email)}?d=identicon&s=120`;
+        const createdUserId = await this.mongodb.create(this.collection, { ...user, password: hashedPassword, scopes, profilePhoto });
         return createdUserId;
     }
 
