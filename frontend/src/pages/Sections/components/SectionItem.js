@@ -17,11 +17,11 @@ const SectionItem = (props) => {
                             </tr>
                             {props.units.map((unit, unitIndex) => {
                                 return (
-                                    <UnitItem key={unitIndex} unitName={unit.id} description={unit.description}>
-                                        <button onClick={() => { props.openDeleteModal(props.sectionName, props.sectionIndex, unit.id, unitIndex) }} className="action-button delete">
+                                    <UnitItem key={unitIndex} unitName={unit.unitName} description={unit.description}>
+                                        <button onClick={() => { props.openDeleteModal(props.sectionName, props.sectionIndex, unit.unitName, unitIndex) }} className="action-button delete">
                                             <i className="ion ion-trash-b" />
                                         </button>
-                                        <button onClick={() => { props.openEditModal(props.sectionName, props.sectionIndex, unit.id, unitIndex) }} className="action-button edit">
+                                        <button onClick={() => { props.openEditModal(props.sectionName, props.sectionIndex, unit.unitName, unitIndex) }} className="action-button edit">
                                             <i className="ion ion-android-create" />
                                         </button>
                                     </UnitItem>

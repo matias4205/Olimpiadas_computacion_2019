@@ -8,10 +8,10 @@ const SectionLayout = (props) => {
             {props.data.map((item, index) => {
                 return (
                     <SectionItem
-                        key={item.id}
-                        sectionName={item.id}
+                        key={index}
+                        sectionName={item.sectionName}
                         sectionIndex={index}
-                        units={item.units}
+                        units={item.unit}
                         openEditModal={props.openEditModal}
                         openDeleteModal={props.openDeleteModal}
                     />

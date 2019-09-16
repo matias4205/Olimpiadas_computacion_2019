@@ -19,190 +19,22 @@ class Section extends Component {
             editModalIsOpened: false,
             data: [
                 {
-                    id: 'A',
-                    units: [
+                    sectionName: 'A',
+                    unit: [
                         {
-                            id: 1,
+                            unitName: 'A1',
                             description: 'test'
                         },
                         {
-                            id: 2,
+                            unitName: 'A2',
                             description: 'test'
                         },
                         {
-                            id: 3,
+                            unitName: 'A3',
                             description: 'test'
                         },
                         {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'B',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'aaaaaaaaaaaaa'
-                        },
-                    ]
-                },
-                {
-                    id: 'C',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        },
-                        {
-                            id: 5,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'D',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        },
-                        {
-                            id: 5,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'E',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'tesssssst'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'F',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'G',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'H',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'I',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
+                            unitName: 'A4',
                             description: 'test'
                         }
                     ]
@@ -261,7 +93,7 @@ class Section extends Component {
         this.setState(prevState => {
             const { data: prevSections } = prevState;
             // From here
-            const prevUnit = prevSections[modalSectionIndex].units[modalUnitIndex]; // Abstracts the previous and specific unit that is going to be modified
+            const prevUnit = prevSections[modalSectionIndex].unit[modalUnitIndex]; // Abstracts the previous and specific unit that is going to be modified
             const newUnit = { // Changes the specific descrption of the abstracted unit
                 ...prevUnit,
                 description: newDescription
@@ -270,7 +102,7 @@ class Section extends Component {
             newSections[modalSectionIndex] = { // We have absolutely no idea about what this is for, but it does not works without it
                 ...prevSections[modalSectionIndex]
             }
-            newSections[modalSectionIndex].units[modalUnitIndex] = newUnit; // This line creates the new array of section with the modified unit
+            newSections[modalSectionIndex].unit[modalUnitIndex] = newUnit; // This line creates the new array of section with the modified unit
             // To here, is the immutable way to change a component state, search about immutability
             return { // The callback returns here the new state and closes the modals
                 ...prevState,
@@ -288,14 +120,14 @@ class Section extends Component {
 
         this.setState(prevState => {
             const { data: prevSections } = prevState;
-            const prevUnits = prevSections[modalSectionIndex].units;
+            const prevUnits = prevSections[modalSectionIndex].unit;
             const newUnits = [...prevUnits];
             newUnits.splice(modalUnitIndex, 1);
             let newSections = [...prevSections];
             newSections[modalSectionIndex] = {
                 ...prevSections[modalSectionIndex]
             }
-            newSections[modalSectionIndex].units = newUnits; // This line creates the new array of section with the modified unit
+            newSections[modalSectionIndex].unit = newUnits; // This line creates the new array of section with the modified unit
             return { // The callback returns here the new state and closes the modals
                 ...prevState,
                 modalSectionIndex: 0,
@@ -324,14 +156,14 @@ class Section extends Component {
                     isOpen={this.state.deleteModalIsOpened}
                     onClose={this.toggleDeleteModal}
                     onClick={this.handleDeleteUnit}
-                    title={`Unit ${this.state.modalSectionName}${this.state.modalUnitName}`}
+                    title={`Unit ${this.state.modalUnitName}`}
                 />
                 <EditModal
                     isOpen={this.state.editModalIsOpened}
                     onClose={this.toggleEditModal}
                     onSubmit={this.handleEditDescription}
-                    title={`Edit unit ${this.state.modalSectionName}${this.state.modalUnitName} description`}
-                    description={this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].description}
+                    title={`Edit unit ${this.state.modalUnitName} description`}
+                    description={this.state.data[this.state.modalSectionIndex].unit[this.state.modalUnitIndex].description}
                 />
             </React.Fragment>
         );
