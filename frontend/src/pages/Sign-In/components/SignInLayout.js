@@ -14,11 +14,11 @@ const SignInLayout = (props) => {
                 <div className="login-box-body">
                     <p className="login-box-msg">Sign in to start your session</p>
                     <form onSubmit={props.onSubmit}>
-                        <div className="form-group has-feedback">
+                        <div className={`form-group ${props.onError ? "has-error" : "" } has-feedback`}>
                             <input type="email" name="email" value={props.formValues.email} className="form-control" placeholder="Email" onChange={props.onChange}/>
                             <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
-                        <div className="form-group has-feedback">
+                        <div className={`form-group ${props.onError ? "has-error" : "" } has-feedback`}>
                             <input type="password" name="password" value={props.formValues.password} className="form-control" placeholder="Password" onChange={props.onChange}/>
                             <span className="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
