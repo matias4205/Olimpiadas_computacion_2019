@@ -13,7 +13,7 @@ var cookieExtractor = function(req) {
     }
 
     //TODO RECORDAR BORRAR ESTO
-    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGlhc3BlcmV6cGNAaG90bWFpbC5jb20iLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTU2ODMyNTM4NywiZXhwIjoxNTY4MzI4OTI3fQ.-g9PFBxQlrB3VdywPR2ltxtxIZjjiO9M8r3I-DcCGOY';
+    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGlhc3BlcmV6cGNAaG90bWFpbC5jb20iLCJyb2xlIjoiYWRtaW5pc3RyYXRvciIsImlhdCI6MTU2ODU5Nzg5NywiZXhwIjoxNTY4NjAxNDM3fQ.Q3sq0YBCys7FLKsXsqM04KtVm1msBDE-CumUvHgPdYA';
 
     return token;
 };
