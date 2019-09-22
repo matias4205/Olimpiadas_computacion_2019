@@ -77,6 +77,11 @@ export const getProductor = () => axios({
 
 /* Sections */
 
+export const getSections = () => axios({
+    url: `${API_URL}/api/sections`,
+    method: 'get'
+});
+
 export const editDescription = (sectionName, unitName, description) => axios({
     url: `${API_URL}/api/sections/unit`,
     method: 'put',

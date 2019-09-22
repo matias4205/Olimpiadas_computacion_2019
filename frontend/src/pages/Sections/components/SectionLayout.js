@@ -11,7 +11,7 @@ const SectionLayout = (props) => {
                         key={index}
                         sectionName={item.sectionName}
                         sectionIndex={index}
-                        units={item.unit}
+                        units={item.units}
                         openEditModal={props.openEditModal}
                         openDeleteModal={props.openDeleteModal}
                     />

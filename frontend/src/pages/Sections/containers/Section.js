@@ -7,6 +7,8 @@ import DeleteModal from '../components/DeleteModal';
 
 import './styles/section_styles.css';
 
+import { getSections } from '../../../utils/api';
+
 class Section extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +22,7 @@ class Section extends Component {
             data: [
                 {
                     sectionName: 'A',
-                    unit: [
+                    units: [
                         {
                             unitName: 'A1',
                             description: 'test'
@@ -44,15 +46,14 @@ class Section extends Component {
     }
 
     async componentDidMount() {
-        // try {
-        //     const response = await fetch('URL');
-        //     const data = await response.json();
-        //     this.setState({
-
-        //     })
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        try {
+            const { data, status } = await getSections();
+            await this.setState({
+                data: data.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     toggleEditModal = async (sectionName, sectionIndex, unitName, unitIndex) => { //We have to edit the state in an inmutable way
@@ -93,7 +94,7 @@ class Section extends Component {
         this.setState(prevState => {
             const { data: prevSections } = prevState;
             // From here
-            const prevUnit = prevSections[modalSectionIndex].unit[modalUnitIndex]; // Abstracts the previous and specific unit that is going to be modified
+            const prevUnit = prevSections[modalSectionIndex].units[modalUnitIndex]; // Abstracts the previous and specific unit that is going to be modified
             const newUnit = { // Changes the specific descrption of the abstracted unit
                 ...prevUnit,
                 description: newDescription
@@ -102,7 +103,7 @@ class Section extends Component {
             newSections[modalSectionIndex] = { // We have absolutely no idea about what this is for, but it does not works without it
                 ...prevSections[modalSectionIndex]
             }
-            newSections[modalSectionIndex].unit[modalUnitIndex] = newUnit; // This line creates the new array of section with the modified unit
+            newSections[modalSectionIndex].units[modalUnitIndex] = newUnit; // This line creates the new array of section with the modified unit
             // To here, is the immutable way to change a component state, search about immutability
             return { // The callback returns here the new state and closes the modals
                 ...prevState,
@@ -120,14 +121,14 @@ class Section extends Component {
 
         this.setState(prevState => {
             const { data: prevSections } = prevState;
-            const prevUnits = prevSections[modalSectionIndex].unit;
+            const prevUnits = prevSections[modalSectionIndex].units;
             const newUnits = [...prevUnits];
             newUnits.splice(modalUnitIndex, 1);
             let newSections = [...prevSections];
             newSections[modalSectionIndex] = {
                 ...prevSections[modalSectionIndex]
             }
-            newSections[modalSectionIndex].unit = newUnits; // This line creates the new array of section with the modified unit
+            newSections[modalSectionIndex].units = newUnits; // This line creates the new array of section with the modified unit
             return { // The callback returns here the new state and closes the modals
                 ...prevState,
                 modalSectionIndex: 0,
@@ -163,8 +164,9 @@ class Section extends Component {
                     onClose={this.toggleEditModal}
                     onSubmit={this.handleEditDescription}
                     title={`Edit unit ${this.state.modalUnitName} description`}
-                    unitName={this.state.data[this.state.modalSectionIndex].unit[this.state.modalUnitIndex].unitName}
-                    description={this.state.data[this.state.modalSectionIndex].unit[this.state.modalUnitIndex].description}
+                    sectionName={this.state.data[this.state.modalSectionIndex].sectionName}
+                    unitName={this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].unitName}
+                    description={this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].description}
                 />
             </React.Fragment>
         );
