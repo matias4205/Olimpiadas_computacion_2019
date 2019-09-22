@@ -163,6 +163,7 @@ class Section extends Component {
                     onClose={this.toggleEditModal}
                     onSubmit={this.handleEditDescription}
                     title={`Edit unit ${this.state.modalUnitName} description`}
+                    unitName={this.state.data[this.state.modalSectionIndex].unit[this.state.modalUnitIndex].unitName}
                     description={this.state.data[this.state.modalSectionIndex].unit[this.state.modalUnitIndex].description}
                 />
             </React.Fragment>
