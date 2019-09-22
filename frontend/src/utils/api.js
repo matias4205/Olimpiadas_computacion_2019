@@ -13,7 +13,7 @@ export const signIn = (email, password) => axios({
     }
 })
 
-export const signUp = (data) => axios({
+export const signUp = data => axios({
     url: `${API_URL}/api/auth/sign-up`,
     method: 'post',
     data: {
@@ -78,4 +78,23 @@ export const updateUser = ({ firstName, lastName, email, profilePhoto, _id }) =>
 export const getProductor = () => axios({
     url: `${API_URL}/api/productor`,
     method: 'get'
+});
+
+/* Sections */
+
+export const getSections = () => axios({
+    url: `${API_URL}/api/sections`,
+    method: 'get'
+});
+
+export const editDescription = (sectionName, unitName, description) => axios({
+    url: `${API_URL}/api/sections/unit`,
+    method: 'put',
+    data: {
+        "sectionName": sectionName,
+        "unit": {
+            "unitName": unitName,
+            "description": description
+        }
+    }
 });

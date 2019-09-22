@@ -7,10 +7,13 @@ import DeleteModal from '../components/DeleteModal';
 
 import './styles/section_styles.css';
 
+import { getSections } from '../../../utils/api';
+
 class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             modalSectionName: '',
             modalSectionIndex: 0,
             modalUnitName: '',
@@ -19,191 +22,23 @@ class Section extends Component {
             editModalIsOpened: false,
             data: [
                 {
-                    id: 'A',
+                    sectionName: '',
                     units: [
                         {
-                            id: 1,
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         },
                         {
-                            id: 2,
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         },
                         {
-                            id: 3,
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         },
                         {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'B',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'aaaaaaaaaaaaa'
-                        },
-                    ]
-                },
-                {
-                    id: 'C',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        },
-                        {
-                            id: 5,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'D',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        },
-                        {
-                            id: 5,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'E',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'tesssssst'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'F',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'G',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'H',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
-                        }
-                    ]
-                },
-                {
-                    id: 'I',
-                    units: [
-                        {
-                            id: 1,
-                            description: 'test'
-                        },
-                        {
-                            id: 2,
-                            description: 'test'
-                        },
-                        {
-                            id: 3,
-                            description: 'test'
-                        },
-                        {
-                            id: 4,
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         }
                     ]
                 }
@@ -212,15 +47,18 @@ class Section extends Component {
     }
 
     async componentDidMount() {
-        // try {
-        //     const response = await fetch('URL');
-        //     const data = await response.json();
-        //     this.setState({
-
-        //     })
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        try {
+            await this.setState({
+                loading: true
+            });
+            const { data, status } = await getSections();
+            await this.setState({
+                loading: false,
+                data: data.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     toggleEditModal = async (sectionName, sectionIndex, unitName, unitIndex) => { //We have to edit the state in an inmutable way
@@ -314,6 +152,7 @@ class Section extends Component {
                 <section className="content">
                     <div className="masonry">
                         <SectionLayout
+                            loading={this.state.loading}
                             data={this.state.data}
                             openEditModal={this.toggleEditModal}
                             openDeleteModal={this.toggleDeleteModal}
@@ -324,13 +163,15 @@ class Section extends Component {
                     isOpen={this.state.deleteModalIsOpened}
                     onClose={this.toggleDeleteModal}
                     onClick={this.handleDeleteUnit}
-                    title={`Unit ${this.state.modalSectionName}${this.state.modalUnitName}`}
+                    title={`Unit ${this.state.modalUnitName}`}
                 />
                 <EditModal
                     isOpen={this.state.editModalIsOpened}
                     onClose={this.toggleEditModal}
                     onSubmit={this.handleEditDescription}
-                    title={`Edit unit ${this.state.modalSectionName}${this.state.modalUnitName} description`}
+                    title={`Edit unit ${this.state.modalUnitName} description`}
+                    sectionName={this.state.data[this.state.modalSectionIndex].sectionName}
+                    unitName={this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].unitName}
                     description={this.state.data[this.state.modalSectionIndex].units[this.state.modalUnitIndex].description}
                 />
             </React.Fragment>

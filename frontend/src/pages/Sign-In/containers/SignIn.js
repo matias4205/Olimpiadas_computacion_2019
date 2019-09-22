@@ -29,35 +29,35 @@ class SignIn extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-        if(this.state.form.email && this.state.form.password){
+        if (this.state.form.email && this.state.form.password) {
             try {
                 this.setState({ error: '' });
                 const { data, status } = await signIn(this.state.form.email, this.state.form.password);
-                if(status === 200){
-                    this.setState({
+                if (status === 200) {
+                    await this.setState({
                         logged: true
                     })
-                }else{
-                    this.setState({
+                } else {
+                    await this.setState({
                         error: 'Email or password invalid'
                     });
                 }
             } catch (error) {
-                this.setState({ error: 'Invalid email or password' });
+                await this.setState({ error: 'Invalid email or password' });
                 console.log(error);
-            }        
+            }
         } else {
-            this.setState({ error: 'Each field is required' });
+            await this.setState({ error: 'Each field is required' });
         }
     }
 
     render() {
         return this.state.logged ?
             <Redirect to="/" />
-        :   <SignInLayout
+            : <SignInLayout
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
-                onError={this.error}
+                onError={this.state.error}
                 formValues={this.state.form}
             />
     }
