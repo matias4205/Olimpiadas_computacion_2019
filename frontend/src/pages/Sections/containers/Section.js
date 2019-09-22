@@ -13,6 +13,7 @@ class Section extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             modalSectionName: '',
             modalSectionIndex: 0,
             modalUnitName: '',
@@ -21,23 +22,23 @@ class Section extends Component {
             editModalIsOpened: false,
             data: [
                 {
-                    sectionName: 'A',
+                    sectionName: '',
                     units: [
                         {
-                            unitName: 'A1',
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         },
                         {
-                            unitName: 'A2',
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         },
                         {
-                            unitName: 'A3',
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         },
                         {
-                            unitName: 'A4',
-                            description: 'test'
+                            unitName: '',
+                            description: ''
                         }
                     ]
                 }
@@ -47,8 +48,12 @@ class Section extends Component {
 
     async componentDidMount() {
         try {
+            await this.setState({
+                loading: true
+            });
             const { data, status } = await getSections();
             await this.setState({
+                loading: false,
                 data: data.data
             })
         } catch (error) {
@@ -147,6 +152,7 @@ class Section extends Component {
                 <section className="content">
                     <div className="masonry">
                         <SectionLayout
+                            loading={this.state.loading}
                             data={this.state.data}
                             openEditModal={this.toggleEditModal}
                             openDeleteModal={this.toggleDeleteModal}
