@@ -4,29 +4,21 @@ import Modal from '../../../components/Modal'
 
 import { editDescription } from '../../../utils/api';
 
-const useSubmitDescription = (props) => {
-    const [description, setDescription] = React.useState(null);
+const useSubmitDescription = props => {
+    const [description, setDescription] = React.useState(false);
 
-    React.useEffect(() => {
-        const submitDescription = async (props) => {
-            if (description !== null && description.newDescription !== props.description) {
-                try {
-                    await editDescription(description.sectionName, description.unitName, description.newDescription);
-                    props.onSubmit(description.newDescription);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-        }
-        submitDescription(props);
-        setDescription(null);
-    });
+    if (description !== false) {
+        editDescription(description.sectionName, description.unitName, description.newDescription)
+            .then(props.onSubmit(description.newDescription))
+            .then(setDescription(false))
+            .catch(error => console.log(error));
+    }
 
     return [description, setDescription];
 }
 
-const EditModal = (props) => {
-    //  Obtain this array from the personalized hook created on line 8
+const EditModal = props => {
+    //  Obtain this array from the personalized hook created on line 7
     const [description, setDescription] = useSubmitDescription(props);
 
     const textAreaRef = React.createRef()
