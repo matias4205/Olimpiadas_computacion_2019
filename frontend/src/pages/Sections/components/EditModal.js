@@ -25,6 +25,7 @@ const EditModal = props => {
 
     return (
         <Modal
+            loading={description.loading}
             isOpen={props.isOpen}
             title={props.title}
             onClose={props.onClose}
@@ -33,7 +34,8 @@ const EditModal = props => {
                     await setDescription({
                         sectionName: props.sectionName,
                         unitName: props.unitName,
-                        newDescription: textAreaRef.current.value
+                        newDescription: textAreaRef.current.value,
+                        loading: true
                     });
                 }}
         >
